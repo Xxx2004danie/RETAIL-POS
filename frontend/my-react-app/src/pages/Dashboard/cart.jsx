@@ -1,6 +1,14 @@
 import { useState } from 'react'
-import {FaXmark,} from "react-icons/fa6";
-function Cart({  onShowCart }) {
+import {
+  FaXmark,
+  FaCartShopping,
+  FaRegCreditCard,
+  FaMoneyBillWave,
+  FaMobileScreen,
+  FaRegTrashCan,
+  FaMagnifyingGlass,
+} from "react-icons/fa6";
+function Cart({ onShowCart }) {
   let [isAdd, setIsAdd] = useState(true);
   return (
     <section className=" z-10 absolute top-0 right-0 h-screen w-full flex flex-col items-start">
@@ -44,13 +52,13 @@ function Cart({  onShowCart }) {
             {/*payment method */}
             <form action="" className="w-full flex justify-between">
               <button className="hover:bg-gray-200 bg-gray-300 text-neutral-900 text-[15px] py-2 px-6 rounded-[10px]">
-                cash
+                <FaMoneyBillWave />
               </button>
               <button className="hover:bg-gray-200 bg-gray-300 text-neutral-900 text-[15px] py-2 px-6 rounded-[10px]">
-                card
+                <FaMobileScreen />
               </button>
               <button className="hover:bg-gray-200 bg-gray-300 text-neutral-900 text-[15px] py-2 px-6 rounded-[10px]">
-                digital
+                <FaRegCreditCard />
               </button>
             </form>
           </section>
@@ -66,29 +74,29 @@ function Cart({  onShowCart }) {
   );
 }
 
-
-
 function List() {
-    return (
-      <li className="  flex justify-between items-center py-4 border-b border-gray-200">
-        <article className="flex items-center gap-4">
-          <p>icon</p>
-          <article className="flex flex-col">
-            <h1 className="text-neutral-900 font-bold">latte</h1>
-            <p className="text-gray-600 text-[10px]">$100</p>
-          </article>
+  return (
+    <li className="  flex justify-between items-center py-4 border-b border-gray-200">
+      <article className="flex items-center gap-4">
+        <p>icon</p>
+        <article className="flex flex-col">
+          <h1 className="text-neutral-900 font-bold">latte</h1>
+          <p className="text-gray-600 text-[10px]">$100</p>
         </article>
-        <button className="bg-gray-300 py-1 w-15 rounded-[10px] text-[10px] flex flex-row justify-around">
-          <p>-</p>
-          <p>1</p>
-          <p>+</p>
-        </button>
-        <article className="flex items-center gap-3">
-          <p className="font-medium text-[12px]">$30</p>
-          <p>icon</p>
-        </article>
-      </li>
-    );
+      </article>
+      <button className="bg-gray-300 py-1 w-15 rounded-[10px] text-[10px] flex flex-row justify-around">
+        <p>-</p>
+        <p>1</p>
+        <p>+</p>
+      </button>
+      <article className="flex items-center gap-3">
+        <p className="font-medium text-[12px]">$30</p>
+        <p>
+          <FaRegTrashCan />
+        </p>
+      </article>
+    </li>
+  );
 }
 
 export default Cart
