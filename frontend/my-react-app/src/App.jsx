@@ -8,8 +8,9 @@ import SalesHistory from "./pages/SalesHistory/salehistory.jsx";
 import Inventory from "./pages/Inventory/inventory.jsx";
 
  
-export let SideBarContext = createContext(0)
-export let OrderContext = createContext(0)
+export let SideBarContext = createContext(0);
+export let OrderContext = createContext(0);
+
 export default function App() {
   let [showSideBar, setShowSideBar] = useState(false);
   let [showCart, setShowCart] = useState(false);
@@ -18,7 +19,7 @@ export default function App() {
   // to show and remove sidebar
   function onShowSideBar() {
     setShowSideBar((showSideBar) => !showSideBar);
-
+  }
      // to show and remove sidebar
   function onChangeOrders() {
     setOrders((order) => order + 1 );
@@ -55,11 +56,4 @@ export default function App() {
 }
 
 
-  /*  
-  echo "# RETAIL-POS" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/Xxx2004danie/RETAIL-POS.git
-git push -u origin main*/
+  
