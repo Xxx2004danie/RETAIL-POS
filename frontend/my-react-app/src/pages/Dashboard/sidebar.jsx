@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { useContext } from "react";
 import { SideBarContext } from "../../App";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import {
   FaDiceD6,
   FaCartShopping,
@@ -9,7 +10,7 @@ import {
   FaXmark,
 } from "react-icons/fa6";
 
-export default function SideBar() {
+function SideBar() {
   let { showSideBar, onShowSideBar } = useContext(SideBarContext);
   return (
     <section className="flex w-full bg-gray50/50 ">
@@ -63,4 +64,6 @@ export default function SideBar() {
       <section className="w-20% bg-opacity-50"></section>
     </section>
   );
-} 
+}
+
+export default memo(SideBar);

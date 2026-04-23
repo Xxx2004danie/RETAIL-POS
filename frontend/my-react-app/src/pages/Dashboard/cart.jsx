@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { memo } from "react";
+import { useState } from "react";
 import {
   FaXmark,
   FaCartShopping,
@@ -8,6 +9,7 @@ import {
   FaRegTrashCan,
   FaMagnifyingGlass,
 } from "react-icons/fa6";
+
 function Cart({ onShowCart }) {
   let [isAdd, setIsAdd] = useState(true);
   return (
@@ -99,4 +101,4 @@ function List() {
   );
 }
 
-export default Cart
+export default memo(Cart);

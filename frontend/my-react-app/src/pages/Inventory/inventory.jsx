@@ -1,8 +1,14 @@
+import { memo } from "react";
 import MenuIcon from "../../components/layout/layout.jsx";
 import SearchBar from "../../components/ui/seachbar.jsx";
-import { FaXmark, FaRegTrashCan, FaMagnifyingGlass , FaPencil } from "react-icons/fa6";
-export default function Inventory() {
+import {
+  FaXmark,
+  FaRegTrashCan,
+  FaMagnifyingGlass,
+  FaPencil,
+} from "react-icons/fa6";
 
+function Inventory() {
   let inventory = "search inventory";
   return (
     <section className="h-screen">
@@ -18,8 +24,7 @@ export default function Inventory() {
         </button>
 
         {/* search bar */}
-        <SearchBar placeholder = "search inventory"/>
-        
+        <SearchBar placeholder="search inventory" />
 
         {/*inventory list */}
         <section className="w-full overflow-x-auto border border-gray-300 rounded-[10px]">
@@ -51,9 +56,11 @@ function Rows() {
       <p>2</p>
       <h2 className="text-neutral-950 font-bold">$4.50</h2>
       <article className="flex gap-3">
-        <FaRegTrashCan /> 
+        <FaRegTrashCan />
         <FaPencil />
       </article>
     </article>
   );
-};
+}
+
+export default memo(Inventory);

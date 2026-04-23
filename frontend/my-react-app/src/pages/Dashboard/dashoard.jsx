@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { memo } from "react";
+import { useState } from "react";
 import SideBar from "./sidebar";
 import SearchBar from "../../components/ui/seachbar.jsx";
 import Button from "../../components/ui/button";
@@ -90,4 +91,4 @@ function Buttonb({ onChangeOrder }) {
   );
 }
 
-export default Sales;
+export default memo(Sales);
