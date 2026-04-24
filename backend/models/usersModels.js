@@ -3,18 +3,18 @@ const mongoose = require("mongoose");
 let userSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: true("Name is required"),
+    require: true,
   },
   password: {
     type: String,
-    require: true("Name is required"),
+    require: true,
     minlengt: 8,
     trim: true,
   },
 
   email: {
     type: String,
-    require: true("Name is required"),
+    require: true,
     lowercase: true,
     trim: true,
     unique: true,
@@ -22,13 +22,13 @@ let userSchema = new mongoose.Schema({
 
   phoneNumber: {
     type: Number,
-    require: true("Name is required"),
+    require: true,
     trim: true,
   },
 
   role: {
     type: String,
-    require: true("Name is required"),
+    require: true,
     enum: ["user", "admin"],
     default: "user",
   },
@@ -36,4 +36,4 @@ let userSchema = new mongoose.Schema({
 
 let User = new mongoose.model("User", userSchema);
 
-export default User;
+module.exports = User;

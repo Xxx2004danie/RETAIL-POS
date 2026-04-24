@@ -14,22 +14,20 @@ import {
   FaRegTrashCan,
 } from "react-icons/fa6";
 
-export default function Text({ showCart, onShowCart }) {
+export default function Sale({ showCart, onShowCart }) {
   return (
-    <main className="lg:grid lg:grid-cols-14 h-screen lg:gap-0">
+    <main className="lg:grid lg:grid-cols-14 md:h-screen lg:gap-0">
       {/*Sidebar*/}
       <aside className=" hidden lg:block lg:col-span-3 ">
         <SideBar />
       </aside>
 
       {/*Dashboard*/}
-      <section className="  col-span-11   flex flex-col h-full">
-        {/* Header */}
+      <section className="  col-span-11   flex flex-col h-screen md:h-full">
         <MenuIcon />
-
-        <section className="lg:grid lg:grid-cols-12 h-[90%]">
+        <section className="lg:grid lg:grid-cols-12 h-[90%]  ">
           {/* product display grid */}
-          <section className="lg:col-span-8 ">
+          <section className="lg:col-span-8  h-full">
             <ProductList />
           </section>
           {/* chart */}

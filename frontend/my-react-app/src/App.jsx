@@ -1,12 +1,12 @@
 import { useState , createContext } from "react"
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Sales from "./pages/Dashboard/dashoard.jsx"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SideBar from "./pages/Dashboard/sidebar.jsx"
 import Cart from "./pages/Dashboard/cart.jsx"
-import User from "./pages/Users/user.jsx";
+import Users from "./pages/Users/user.jsx";
 import SalesHistory from "./pages/SalesHistory/salehistory.jsx";
-import Inventory from "./pages/Inventory/inventory.jsx";
-import Text from "./pages/Dashboard/dashboard.jsx";
+import Inventory from "./pages/Inventory/inventory1.jsx";
+import Sale from "./pages/Dashboard/dashboard.jsx";
+
 
  
 export let SideBarContext = createContext(0);
@@ -15,7 +15,8 @@ export let OrderContext = createContext(0);
 export default function App() {
   let [showSideBar, setShowSideBar] = useState(false);
   let [showCart, setShowCart] = useState(false);
-  let [orders , setOrders]  = useState(0)
+  let [orders, setOrders] = useState(0);
+ 
 
   // to show and remove sidebar
   function onShowSideBar() {
@@ -42,10 +43,10 @@ export default function App() {
               <Routes>
                 <Route
                   path="/"
-                  element={<Text showCart={showCart} onShowCart={onShowCart} />}
+                  element={<Sale showCart={showCart} onShowCart={onShowCart} />}
                 ></Route>
                 <Route path="/inventory" element={<Inventory />}></Route>
-                <Route path="/users" element={<User />}></Route>
+                <Route path="/users" element={<Users />}></Route>
                 <Route path="/history" element={<SalesHistory />}></Route>
               </Routes>
             </section>

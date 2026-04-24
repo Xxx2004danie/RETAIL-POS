@@ -41,8 +41,9 @@ let productSchema = new mongoose.Schema({
     type: String,
   },
 
-  isActive: {
-    Boolean,
-    dafault: true,
-  },
+  isActive: Boolean,
 });
+
+let products = new mongoose.model("products", productSchema);
+
+module.exports = products; 

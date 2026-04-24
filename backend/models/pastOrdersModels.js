@@ -3,39 +3,41 @@ const mongoose = require("mongoose");
 let pastOrderSchema = new mongoose.Schema({
   CustomerName: {
     type: String,
-    require: true("Name of customer  is required"),
+    require: true,
   },
-
 
   items: [
     {
-      name: String,
+      namesofitems: [String],
       quantity: {
         type: Number,
         required: true,
       },
-      price: {
-        type: Number,
-        required: true
-      }
-    },],
-  
+      price: [
+        {
+          type: Number,
+          required: true,
+        },
+      ],
+    },
+  ],
+
   total: {
     type: Number,
-    required: true
+    required: true,
   },
 
   date: {
     type: Date,
-    default : Date.now
+    default: Date.now,
   },
 
   cashier: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 let PastOrders = new mongoose.model("PastOrders", pastOrderSchema);
 
-export default PastOrders;
+module.exports = PastOrders;

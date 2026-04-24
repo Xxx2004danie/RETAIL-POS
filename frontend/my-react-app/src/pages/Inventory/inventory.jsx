@@ -1,6 +1,5 @@
 import { memo } from "react";
 import MenuIcon from "../../components/layout/layout.jsx";
-import SearchBar from "../../components/ui/seachbar.jsx";
 import {
   FaXmark,
   FaRegTrashCan,
