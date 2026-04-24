@@ -6,6 +6,7 @@ import Cart from "./pages/Dashboard/cart.jsx"
 import User from "./pages/Users/user.jsx";
 import SalesHistory from "./pages/SalesHistory/salehistory.jsx";
 import Inventory from "./pages/Inventory/inventory.jsx";
+import Text from "./pages/Dashboard/dashboard.jsx";
 
  
 export let SideBarContext = createContext(0);
@@ -32,27 +33,27 @@ export default function App() {
   return (
     <BrowserRouter>
       <SideBarContext.Provider value={{ showSideBar, onShowSideBar }}>
-        <OrderContext.Provider value = {{orders, onChangeOrders}} >
-           <section className="relative">
-          {showSideBar && <SideBar />}
+        <OrderContext.Provider value={{ orders, onChangeOrders }}>
+          <section className="relative">
+            {showSideBar && <SideBar />}
 
-          {/* Routes */}
-          <section>
-            <Routes>
-              <Route
-                path="/"
-                element={<Sales showCart={showCart}  onShowCart={onShowCart} />}
-              ></Route>
-              <Route path="/inventory" element={<Inventory />}></Route>
-              <Route path="/users" element={<User />}></Route>
-              <Route path="/history" element={<SalesHistory />}></Route>
-            </Routes>
+            {/* Routes */}
+            <section>
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Text showCart={showCart} onShowCart={onShowCart} />}
+                ></Route>
+                <Route path="/inventory" element={<Inventory />}></Route>
+                <Route path="/users" element={<User />}></Route>
+                <Route path="/history" element={<SalesHistory />}></Route>
+              </Routes>
+            </section>
           </section>
-        </section>
-       </OrderContext.Provider>
+        </OrderContext.Provider>
       </SideBarContext.Provider>
     </BrowserRouter>
-  )
+  );
 }
 
 

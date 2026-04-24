@@ -13,7 +13,7 @@ import {
 function Cart({ onShowCart }) {
   let [isAdd, setIsAdd] = useState(true);
   return (
-    <section className=" z-10 absolute top-0 right-0 h-screen w-full flex flex-col items-start">
+    <section className=" z-10 absolute lg:static top-0 right-0 h-screen lg:h-full w-full flex flex-col items-start">
       <header className="w-full flex flex-row justify-between p-4 h-[10%]">
         <h1 className="text-neutral-900 font-extrabold">current order</h1>
         <p>

@@ -15,10 +15,10 @@ function SideBar() {
   return (
     <section className="flex w-full bg-gray50/50 ">
       {/*sidnav*/}
-      <section className=" flex flex-col gap-4 w-[80%]  h-screen bg-neutral-900 bg-opacity-50  p-5">
+      <section className=" flex flex-col gap-4 w-full  h-screen bg-neutral-900 bg-opacity-50  p-5">
         <header className="flex justify-between items-center">
           <h1 className="text-blue-700 font-extrabold  ">RetailPOS</h1>
-          <p className="text-white md:hidden">
+          <p className="text-white lg:hidden">
             <FaXmark onClick={onShowSideBar} />
           </p>
         </header>
@@ -60,8 +60,6 @@ function SideBar() {
           </ul>
         </nav>
       </section>
-      {/*blank*/}
-      <section className="w-20% bg-opacity-50"></section>
     </section>
   );
 }
