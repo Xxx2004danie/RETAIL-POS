@@ -4,7 +4,7 @@ import UserModalForm from "../../modal/adduserModal.jsx";
 import SideBar from "../Dashboard/sidebar.jsx";
 import Userlist from "./userlist.jsx";
 
-export default function Users({ showCart, onShowCart }) {
+ function Users({ showCart, onShowCart }) {
   let [userModal, setUserModal] = useState(false);
 
   // to toggle userModal
@@ -27,3 +27,4 @@ export default function Users({ showCart, onShowCart }) {
     </main>
   );
 }
+export default memo(Users)

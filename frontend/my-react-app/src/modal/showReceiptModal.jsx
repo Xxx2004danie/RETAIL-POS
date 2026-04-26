@@ -1,11 +1,16 @@
 import { useContext } from "react";
+import { ReceiptContext } from "../pages/SalesHistory/saleslist";
+
 export default function ReceiptModal() {
-      let { showReceipt, onShow } = useContext(ReceiptContext);
+  let { showReceipt, onShow, onClose } = useContext(ReceiptContext);
   return (
-    <main className="  fixed right-0 top-0 inset-0 bg-white flex items-center justify-center p-4">
+    <main className="  fixed right-0 top-0 inset-0 flex items-center justify-center p-4">
       <section className="bg-white w-full max-w-lg border border-gray-200 rounded-xl shadow-lg p-6 relative">
         {/* Close Button */}
-        <button className="absolute top-3 right-4 text-gray-500 text-xl">
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-4 text-gray-500 text-xl"
+        >
           &times;
         </button>
 
@@ -75,16 +80,10 @@ export default function ReceiptModal() {
 
         {/* Action Buttons */}
         <form className="mt-5 flex gap-3">
-          <button
-            onClick={onShow}
-            className="w-full border border-blue-700 text-gray-700 font-bold py-2 rounded-lg"
-          >
+          <button className="w-full border border-blue-700 text-gray-700 font-bold py-2 rounded-lg">
             Print
           </button>
-          <button
-            onClick={onShow}
-            className="w-full bg-blue-700 text-white py-2 rounded-lg"
-          >
+          <button className="w-full bg-blue-700 text-white py-2 rounded-lg">
             Download
           </button>
         </form>

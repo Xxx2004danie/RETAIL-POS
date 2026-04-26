@@ -1,9 +1,12 @@
-export default function ProductModalForm() {
+export default function ProductModalForm({ onClose }) {
   return (
     <section className="fixed inset-0  flex items-center justify-center p-4">
       <section className="bg-gray-100 w-full max-w-md rounded-xl shadow-lg p-6 relative">
         {/* Close Button */}
-        <button className="absolute top-3 right-4 text-gray-500 text-xl">
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-4 text-gray-500 text-xl"
+        >
           &times;
         </button>
 
@@ -42,8 +45,6 @@ export default function ProductModalForm() {
             <option value="Manager">cosmetics</option>
             <option value="Manager">meat</option>
           </select>
-
-          
 
           <button
             type="submit"

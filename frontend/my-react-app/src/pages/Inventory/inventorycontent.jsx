@@ -1,18 +1,31 @@
+import { useState } from "react";
 import SearchBar from "../../components/ui/seachbar.jsx";
-import {
-  FaXmark,
-  FaRegTrashCan,
-  FaPencil,
-} from "react-icons/fa6";
+import ProductModalForm from "../../modal/addproductModal.jsx";
+import { FaXmark, FaRegTrashCan, FaPencil } from "react-icons/fa6";
+
 export default function InventoryUi() {
+  let [showModal, setShowModal] = useState(false);
+
+  // toggle inventory modal
+  function onShow() {
+    setShowModal(true);
+  }
+
+  function onClose() {
+    setShowModal(false);
+  }
+
   return (
-    <section className="flex flex-col gap-4 p-4 bg-gray-200">
+    <section className="flex flex-col  relative gap-4 p-4 bg-gray-200 h-[90vh]">
       <header>
         <h1 className=" text-neutral-900 font-bold text-2xl">Inventory</h1>
         <p className="text-[12px] text-gray-600">Manage product stock</p>
       </header>
 
-      <button className="w-full bg-blue-800 text-white flex justify-start px-5 py-2 rounded-[10px] my-2">
+      <button
+        onClick={onShow}
+        className="w-full bg-blue-800 text-white flex justify-start px-5 py-2 rounded-[10px] my-2"
+      >
         + add product
       </button>
 
@@ -20,9 +33,9 @@ export default function InventoryUi() {
       <SearchBar placeholder="search inventory" />
 
       {/*inventory list */}
-      <section className="w-full overflow-x-auto border border-gray-300 rounded-[10px]">
+      <section className="w-full flex-1 overflow-y-auto  overflow-x-auto border border-gray-300 rounded-[10px]">
         {/* table header */}
-        <article className="flex   gap-10 p-4">
+        <article className="flex  justify-around gap-10 p-4 w-full">
           <h1 className="shrink-0">Product</h1>
           <h1 className="shrink-0">Category</h1>
           <h1 className="shrink-0">Stock</h1>
@@ -33,16 +46,24 @@ export default function InventoryUi() {
         <Rows />
         <Rows />
         <Rows />
-
+        <Rows />
+        <Rows />
+        <Rows />
+        <Rows />
+        <Rows />
+        <Rows />
+        <Rows />
         <Rows />
       </section>
+
+      {showModal && <ProductModalForm onClose={onClose} />}
     </section>
   );
 }
 
 function Rows() {
   return (
-    <article className="bg-white flex items-center gap-12 p-4 border-t border-gray-300">
+    <article className="bg-white w-full flex items-center justify-around gap-12 p-4 border-t border-gray-300">
       <h1 className="font-bold text-neutral-950  ">cocacola</h1>
       <p className="bg-blue-300  text-blue-600 px-2 rounded-[7px]">cash</p>
       <p>2</p>

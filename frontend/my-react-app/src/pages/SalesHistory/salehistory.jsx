@@ -4,8 +4,7 @@ import SideBar from "../Dashboard/sidebar";
 import Sale from "../Dashboard/dashboard";
 import SalesList from "./saleslist";
 
-export default function SalesHistory() {
- 
+function SalesHistory() {
   return (
     <main className="lg:grid lg:grid-cols-14 md:h-screen lg:gap-0">
       {/*Sidebar*/}
@@ -14,10 +13,12 @@ export default function SalesHistory() {
       </aside>
 
       {/* user management */}
-      <section className="  col-span-11   flex flex-col h-screen md:h-full">
+      <section className="  col-span-11   flex flex-col h-screen  ">
         {/* userList */}
         <SalesList />
       </section>
     </main>
   );
 }
+
+export default SalesHistory;

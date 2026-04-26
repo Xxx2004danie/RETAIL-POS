@@ -1,10 +1,10 @@
 import MenuIcon from "../../components/layout/layout"
 import UserModalForm from "../../modal/adduserModal";
-export default function Userlist({userModal, onChangeModal }) {
+export default function Userlist({ userModal, onChangeModal }) {
   return (
     <section className="relative h-screen bg-gray-100 ">
       <MenuIcon />
-      <section className=" flex flex-col gap-1 md:gap-3 bg-gray-100 min-w-full p-4">
+      <section className=" flex flex-col gap-1 md:gap-3 lg:h-[90vh]  min-w-full p-4">
         <h1 className=" font-bold text-2xl ">User Management</h1>
         <p className="text-gray-500 text-[11px]">
           Manage staff accounts and roles
@@ -17,7 +17,14 @@ export default function Userlist({userModal, onChangeModal }) {
         </button>
 
         {/* Users */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <section className="grid grid-cols-1 lg:flex-1 overflow-y-auto md:grid-cols-2 lg:grid-cols-3 gap-3 ">
+          <UserDetails />
+          <UserDetails />
+          <UserDetails />
+          <UserDetails />
+          <UserDetails />
+          <UserDetails />
+          <UserDetails />
           <UserDetails />
         </section>
       </section>
@@ -27,10 +34,9 @@ export default function Userlist({userModal, onChangeModal }) {
   );
 }
 
-
 function UserDetails() {
   return (
-    <article className=" flex flex-col gap-2 md:gap-3 p-5 bg-white rounded-[10px] h-auto ">
+    <article className=" flex flex-col gap-2 md:gap-3 p-5 border border-gray-300 bg-white rounded-[10px] h-auto ">
       <header className="flex justify-between items-center">
         <p className="bg-blue-200 text-blue-900 font-extrabold rounded-[50px] px-3 py-2">
           JS

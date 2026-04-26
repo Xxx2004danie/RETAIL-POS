@@ -13,10 +13,10 @@ import {
 function Cart({ onShowCart }) {
   let [isAdd, setIsAdd] = useState(true);
   return (
-    <section className=" z-10 absolute lg:static top-0 right-0 h-screen lg:h-full w-full flex flex-col items-start">
+    <section className=" z-10 absolute md:static top-0 right-0 h-screen md:h-[90%]  lg:h-full w-full flex flex-col items-start">
       <header className="w-full flex flex-row justify-between p-4 h-[10%]">
         <h1 className="text-neutral-900 font-extrabold">current order</h1>
-        <p className="lg:hidden">
+        <p className="md:hidden">
           {" "}
           <FaXmark onClick={onShowCart} />
         </p>
@@ -31,7 +31,7 @@ function Cart({ onShowCart }) {
             <List />
           </ul>
 
-          <section className="p-4 flex flex-col gap-1 h-[40%]">
+          <section className="p-4 flex flex-col gap-1  h-[40%]">
             <article className="flex justify-between">
               <p className="text-gray-400 text-[11px]">Subtotal</p>
               <p className="text-neutral-900 text-[12px]">$1</p>
@@ -78,9 +78,8 @@ function Cart({ onShowCart }) {
 
 function List() {
   return (
-    <li className="  flex justify-between items-center py-4 border-b border-gray-200">
-      <article className="flex items-center gap-4">
-        <p>icon</p>
+    <li className="  flex justify-between items-center py-4  md:py-0 px-0 border-b border-gray-200">
+      <article className="flex items-center gap-4  md:2">
         <article className="flex flex-col">
           <h1 className="text-neutral-900 font-bold">latte</h1>
           <p className="text-gray-600 text-[10px]">$100</p>
