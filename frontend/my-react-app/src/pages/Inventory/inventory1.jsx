@@ -12,7 +12,7 @@ import {
 
 function Inventory({ showCart, onShowCart }) {
   return (
-    <main className="lg:grid lg:grid-cols-14  lg:gap-0 lg:screen">
+    <main className=" lg:grid lg:grid-cols-14  lg:gap-0 lg:screen">
       {/*Sidebar*/}
       <aside className=" hidden lg:block lg:col-span-3 h-screen ">
         <SideBar />

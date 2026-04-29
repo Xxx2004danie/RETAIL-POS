@@ -10,7 +10,7 @@ export default function SearchBar({ placeholder }) {
       <input
         type="text"
         placeholder={placeholder}
-        className=" w-full bg-gray-50 rounded-[10px] py-2 pl-7 text-[11px] text-gray-400 font-medium"
+        className=" outline-0 w-full bg-gray-50 rounded-[10px] py-2 pl-7 text-[11px] text-gray-400 font-medium"
       />
     </form>
   );

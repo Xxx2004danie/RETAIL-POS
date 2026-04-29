@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const dotenv = require('dotenv');
 const app = express();
+const cors = require('cors')
 
 //DATABASE COLLECTION
 const Products = require("./models/productModels");
@@ -10,10 +11,15 @@ const Users = require("./models/usersModels");
 
 dotenv.config({ path: "setting.env" });
 
+// ALLOW ALL PATH
+app.use(cors());
+
 // MIDDLEWARE
 app.use(express.json());
 
 // ROUTES
+
+//ADD PRODUCT ROUTE
 app.post("/api/v1/products", (req, res) => {
   try {
     Products.create(req.body);
@@ -30,6 +36,7 @@ app.post("/api/v1/products", (req, res) => {
   }
 });
 
+//GET ALL PRODUCT 
 app.get("/api/v1/products", async (req, res) => {
   try {
     let products = await Products.find();
@@ -53,7 +60,6 @@ app.get("/api/v1/products", async (req, res) => {
 });
 
 // GET PRODUCT BY CATEGORY
-
 app.get("/api/v1/products", async (req, res) => {
   try {
     let products = await Products.find(req.query);
@@ -75,7 +81,7 @@ app.get("/api/v1/products", async (req, res) => {
   }
 });
 
-// FOR SALES HISTORY
+// ADD TO SALES HISTORY
 app.post("/api/v1/sale", async (req, res) => {
   try {
     let sale = await Orders.create(req.body);
@@ -90,7 +96,6 @@ app.post("/api/v1/sale", async (req, res) => {
 });
 
 //  TO GET ALL SALES
-
 app.get("/api/v1/sales", async (req, res) => {
   try {
     let sales = await Orders.find();

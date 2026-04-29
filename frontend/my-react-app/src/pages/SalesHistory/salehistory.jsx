@@ -12,7 +12,7 @@ function SalesHistory() {
         <SideBar />
       </aside>
 
-      {/* user management */}
+      {/* user management */}  
       <section className="  col-span-11   flex flex-col h-screen  ">
         {/* userList */}
         <SalesList />

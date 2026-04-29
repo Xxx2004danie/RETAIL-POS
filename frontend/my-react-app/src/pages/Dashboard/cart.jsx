@@ -13,7 +13,7 @@ import {
 function Cart({ onShowCart }) {
   let [isAdd, setIsAdd] = useState(true);
   return (
-    <section className=" z-10 absolute md:static top-0 right-0 h-screen md:h-[90%]  lg:h-full w-full flex flex-col items-start">
+    <section className=" z-10 absolute md:static top-0 right-0 h-screen md:h-[90%]  lg:h-full w-full flex flex-col items-start bg-white">
       <header className="w-full flex flex-row justify-between p-4 h-[10%]">
         <h1 className="text-neutral-900 font-extrabold">current order</h1>
         <p className="md:hidden">
@@ -78,7 +78,7 @@ function Cart({ onShowCart }) {
 
 function List() {
   return (
-    <li className="  flex justify-between items-center py-4  md:py-0 px-0 border-b border-gray-200">
+    <li className="  flex justify-between items-center p-4   border-b border-gray-200">
       <article className="flex items-center gap-4  md:2">
         <article className="flex flex-col">
           <h1 className="text-neutral-900 font-bold">latte</h1>
