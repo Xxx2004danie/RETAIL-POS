@@ -192,9 +192,29 @@ app.get("/api/v1/users/:userid", async (req, res) => {
     res.status(400).json({
       status: "request faild",
       message: "failed to get users",
-      error: error.message,
+      error: error.message,n
     });
   }
 });
+
+
+//DELETE A USER
+app.delete("/api/v1/users", (req, res) => {
+  try{
+     Users.deleteOne({username: "isaiah"})
+    res.status(200).json({
+      status: "successfull",
+      message: "deleted"
+    })
+
+  }catch(error) {
+    res.status(400).json({
+      status: "failed",
+      message: " failed to deleted user",
+      error: message.error
+    })
+
+  }
+} )
 
 module.exports = app;

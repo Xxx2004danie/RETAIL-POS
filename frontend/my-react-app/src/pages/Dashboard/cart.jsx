@@ -1,5 +1,6 @@
 import { memo } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { OrderContext } from "../../App";
 import {
   FaXmark,
   FaCartShopping,
@@ -12,15 +13,21 @@ import {
 
 function Cart({ onShowCart }) {
   let [isAdd, setIsAdd] = useState(true);
+  let { orders, onChangeOrders } = useContext(OrderContext);
   return (
     <section className=" z-10 absolute md:static top-0 right-0 h-screen md:h-[90%]  lg:h-full w-full flex flex-col items-start bg-white">
       <header className="w-full flex flex-row justify-between p-4 h-[10%]">
         <h1 className="text-neutral-900 font-extrabold">current order</h1>
+        <i className="flex gap-1 text-red-500">
+          {orders}
+          <strong className="text-gray-500">items</strong>
+        </i>
         <p className="md:hidden">
           {" "}
           <FaXmark onClick={onShowCart} />
         </p>
       </header>
+      ``
       {isAdd ? (
         <section className="flex-1  w-full h-[90%] ">
           <ul className="h-[60%] px-5 overflow-auto border-y border-gray-200">

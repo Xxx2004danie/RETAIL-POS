@@ -2,6 +2,7 @@ import { useState, useContext, createContext } from "react";
 import MenuIcon from "../../components/layout/layout";
 import showReceiptModal from "../../modal/showReceiptModal";
 import ReceiptModal from "../../modal/showReceiptModal";
+import { TbEyeFilled } from "react-icons/tb";
 
 export let ReceiptContext = createContext();
 export default function SalesList() {
@@ -36,31 +37,25 @@ export default function SalesList() {
           <section className="flex flex-col lg:flex-row lg:h-[65vh] mb-2 gap-2">
             <section className="grid grid-cols-2 gap-2 lg:grid-cols-1 lg:w-[20%]">
               <article className=" bg-gray-50 border border-gray-300 p-4 rounded-[10px]">
-                <p className="text-[11px] text-gray-500">Today's Sales</p>
+                <p className="text-[11px] text-gray-500">Today's Revenue</p>
                 <h1 className="text-neutral-950  font-bold text-2xl">
                   $111.00
                 </h1>
               </article>
 
               <article className=" bg-gray-50 border border-gray-300 p-4 rounded-[10px]">
-                <p className="text-[11px] text-gray-500">Today's Sales</p>
-                <h1 className="text-neutral-950  font-bold text-2xl">
-                  $111.00
-                </h1>
+                <p className="text-[11px] text-gray-500">profit</p>
+                <h1 className="text-neutral-950  font-bold text-2xl">$39</h1>
               </article>
 
               <article className=" bg-gray-50 border border-gray-300 p-4 rounded-[10px]">
-                <p className="text-[11px] text-gray-500">Today's Sales</p>
-                <h1 className="text-neutral-950  font-bold text-2xl">
-                  $111.00
-                </h1>
+                <p className="text-[11px] text-gray-500">No. orders made</p>
+                <h1 className="text-neutral-950  font-bold text-2xl">10</h1>
               </article>
 
               <article className=" bg-gray-50 border border-gray-300 p-4 rounded-[10px]">
-                <p className="text-[11px] text-gray-500">Today's Sales</p>
-                <h1 className="text-neutral-950  font-bold text-2xl">
-                  $111.00
-                </h1>
+                <p className="text-[11px] text-gray-500">NO. product sold</p>
+                <h1 className="text-neutral-950  font-bold text-2xl">20</h1>
               </article>
             </section>
 
@@ -115,7 +110,9 @@ function TableRows() {
         cash
       </button>
       <h3 className="text-neutral-800 font-medium">sarah</h3>
-      <p onClick={onShow}>ic</p>
+      <p onClick={onShow}>
+        <TbEyeFilled />
+      </p>
     </article>
   );
 }

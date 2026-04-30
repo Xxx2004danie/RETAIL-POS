@@ -41,7 +41,7 @@ function Sale({ showCart, onShowCart }) {
         </section>
 
         {/* carticon */}
-        <button className="absolute bottom-5 right-8 md:hidden">
+        <button className="absolute bottom-10 right-10 md:hidden">
           <article className="relative">
             <p className="absolute -top-2 -right-2 text-red-800 text-[10px] font-extrabold">
               {orders}

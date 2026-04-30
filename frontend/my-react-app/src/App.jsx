@@ -1,4 +1,10 @@
-import { useState, createContext, useReducer } from "react";
+import {
+  useState,
+  createContext,
+  useReducer,
+  useEffect,
+  useCallback,
+} from "react";
 import { memo } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SideBar from "./pages/Dashboard/sidebar.jsx";
@@ -14,6 +20,26 @@ export let OrderContext = createContext(0);
 export let ReducerContext = createContext();
 
 //user details
+let product = [
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "fanta",
+    prize: "$500",
+  },
+  {
+    name: "malt",
+    prize: "$1000",
+  },
+  {
+    name: "perfume",
+    prize: "$5000",
+  },
+];
+
+//user details
 let user = [
   {
     short: "sw",
@@ -24,7 +50,7 @@ let user = [
 ];
 // initial state for reducer
 let initialState = {
-  products: [],
+  products: [...product],
   orders: [],
   sales: [],
   users: [...user],
@@ -64,6 +90,30 @@ function App() {
   let [showCart, setShowCart] = useState(false);
   let [orders, setOrders] = useState(0);
   let [state, dispatch] = useReducer(reducer, initialState);
+
+  // fetching user details
+  let users = useCallback(() => {
+    useEffect(() => {
+      async function getUsers() {
+        try {
+          let response = await fetch("http://localhost:5000/api/v1/users");
+          let users = await response.json();
+
+          dispatch({
+            type: "show_users",
+            data: users,
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      // get users
+      getUsers();
+    }, []);
+  }, []);
+
+  users();
 
   // to show and remove sidebar
   function onShowSideBar() {

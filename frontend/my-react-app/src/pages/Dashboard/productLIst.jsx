@@ -12,7 +12,8 @@ import {
   FaRegTrashCan,
 } from "react-icons/fa6";
 export default function ProductList({ onChangeOrder }) {
-  let state = useReducer(ReducerContext);
+  let state = useContext(ReducerContext);
+  let { orders, onChangeOrders } = useContext(OrderContext);
 
   // product category button style
   let btnSyles =
@@ -40,21 +41,19 @@ export default function ProductList({ onChangeOrder }) {
 
       {/* Box 3 - Product Buttons Grid */}
 
-      <section className="  w-full flex-1 overflow-y-auto grid grid-cols-2 gap-1 justify-center items-start  "></section>
+      <section className="  w-full flex-1 overflow-y-auto grid grid-cols-2 gap-1 justify-start items-start  ">
+        {state.products.map((product) => {
+          return (
+            <button
+              onClick={onChangeOrders}
+              className=" flex flex-col  items-center justify-center  bg-white h-25  text-neutral-900  border-2 border-gray-200 hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
+            >
+              <p className="text-sm text-blue-400 ">{product.name}</p>
+              <h1 className="text-lg font-bold ">{product.prize}</h1>
+            </button>
+          );
+        })}
+      </section>
     </section>
-  );
-}
-
-function Buttonb() {
-  let { orders, onChangeOrders } = useContext(OrderContext);
-
-  return (
-    <button
-      onClick={onChangeOrders}
-      className=" flex flex-col  items-center justify-center  bg-white h-25  text-neutral-900  border-2 border-gray-200 hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
-    >
-      <p className="text-sm text-blue-400 ">Product B</p>
-      <h1 className="text-lg font-bold ">$15</h1>
-    </button>
   );
 }
