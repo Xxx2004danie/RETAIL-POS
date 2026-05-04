@@ -23,7 +23,7 @@ export default function ProductList({ onChangeOrder }) {
     " flex gap-2 bg-white w-20 shrink-0 text-neutral-900 rounded-[10px] p-2  border-2 border-gray-200 hover:border-blue-200 cursor-pointer hover:bg-blue-100";
 
   return (
-    <section className="flex flex-col   bg-gray-200 w-full  h-[90vh] p-3 ">
+    <section className="flex flex-col   bg-gray-300 w-full  h-[90vh] p-3 ">
       {/* product analysis */}
       <nav className=" flex flex-row  gap-3    overflow-x-auto  p-2 shrink-0">
         <Button className={navBtnStyle}>Receipt</Button>
@@ -41,12 +41,12 @@ export default function ProductList({ onChangeOrder }) {
 
       {/* Box 3 - Product Buttons Grid */}
 
-      <section className="  w-full flex-1 overflow-y-auto grid grid-cols-2 gap-1 justify-start items-start  ">
+      <section className="  w-full flex-1 overflow-y-auto grid grid-cols-2 md:grid-cols-3    p-1 gap-1">
         {state.products.map((product) => {
           return (
             <button
               onClick={onChangeOrders}
-              className=" flex flex-col  items-center justify-center  bg-white h-25  text-neutral-900  border-2 border-gray-200 hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
+              className=" flex flex-col  items-center justify-center  bg-gray-50  text-neutral-900  border-2 border-white hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
             >
               <p className="text-sm text-blue-400 ">{product.name}</p>
               <h1 className="text-lg font-bold ">{product.prize}</h1>

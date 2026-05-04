@@ -26,6 +26,46 @@ let product = [
     prize: "$500",
   },
   {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
+    name: "Bread",
+    prize: "$500",
+  },
+  {
     name: "fanta",
     prize: "$500",
   },

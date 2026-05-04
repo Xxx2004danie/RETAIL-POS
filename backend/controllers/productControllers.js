@@ -11,7 +11,7 @@ let addProduct = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      status: "unsuccessful",
+      status: "error",
       message: "error adding product",
       error: error.message,
     });
@@ -22,29 +22,13 @@ let addProduct = async (req, res) => {
 
 let getAllProduct = async (req, res) => {
   try {
-    let { category } = req.query;
-
-    // filtering by category
-    let filter = {};
-    if (filter) {
-      filter.category = category;
-    }
-
     // getting products
-    let products = await Product.find(filter);
+    let products = await Products.find();
 
-    // if no product is found
-    if (products.length === 0) {
-      res.status(404).json({
-        status: "nothing found",
-        message: "no items available",
-      });
-    } else {
-      res.status(200).json({
-        status: "successful",
-        data: products,
-      });
-    }
+    res.status(200).json({
+      status: "successful",
+      data: products,
+    });
   } catch (error) {
     res.status(500).json({
       status: "unsuccessful",
@@ -57,33 +41,60 @@ let getAllProduct = async (req, res) => {
 
 let getOneItem = async (req, res) => {
   try {
-    let product = Product.findById(req.params.id);
+    let product = await Products.findById(req.params.id);
 
     // checking if no product
     if (!product) {
-      res.status(404).json({
-        status: "successful",
-        message: "item not found",
+      return res.status(404).json({
+        status: "failed",
+        message: " not found",
       });
     } else {
-      res.status(200).json({
+      return res.status(200).json({
         status: "successful",
         data: product,
       });
     }
   } catch (error) {
     res.status(500).json({
-      status: "unsuccesful",
+      status: "unsuccessful",
       message: "error",
       error: error.message,
     });
   }
 };
 
+
+// deleting all product
+
+let deleteAllProduct = async(req, res) => {
+  try {
+    let data = await Products.deleteMany();
+    if (data.length === 0) {
+      return res.status(200).json({
+        status: "fail",
+        message: "no product yet",
+      });
+    }
+    res.status(200).json({
+      status: "success",
+      message: "deleted all products",
+    });
+  } catch (error) {
+      res.status(500).json({
+        status: "error",
+        message: "error",
+        error: error.message
+      });
+  }
+
+}
+
 // EXPORTTING ALL FUNCTIONS
 
-module.export = {
+module.exports = {
   addProduct,
   getOneItem,
   getAllProduct,
+  deleteAllProduct,
 };

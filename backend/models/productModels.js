@@ -12,7 +12,7 @@ let productSchema = new mongoose.Schema({
     requied: true,
     enum: [
       "food",
-      "beverages",
+      "beverage",
       "household",
       "cosmetics",
       "electronics",
@@ -26,22 +26,11 @@ let productSchema = new mongoose.Schema({
     min: 0,
   },
 
-  Stock: {
+  stock: {
     type: Number,
     required: true,
     min: 0,
   },
-
-  barcode: {
-    type: String,
-    unique: true,
-  },
-
-  description: {
-    type: String,
-  },
-
-  isActive: Boolean,
 });
 
 let products = new mongoose.model("products", productSchema);

@@ -1,15 +1,14 @@
 const express = require("express");
 const {
-  creatUser,
+  createUser,
   getAllUsers,
   getOneUser,
   deleteUser,
 } = require("../controllers/usersController.js");
-const { model } = require("mongoose");
 
 let router = express.Router();
 
-router.route("/").post(creatUser).get(getAllUsers);
+router.route("/").post(createUser).get(getAllUsers);
 
 router.route("/:id").get(getOneUser).delete(deleteUser);
 

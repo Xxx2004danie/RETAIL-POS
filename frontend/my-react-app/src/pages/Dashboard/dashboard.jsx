@@ -31,11 +31,11 @@ function Sale({ showCart, onShowCart }) {
         <MenuIcon />
         <section className="md:grid md:grid-cols-12 h-[90vh] md:border-t md:border-gray-200 ">
           {/* product display grid */}
-          <section className="md:col-span-8 h-full">
+          <section className="  md:col-span-6 lg:col-span-8 h-[90vh]">
             <ProductList />
           </section>
           {/* chart */}
-          <section className="  hidden md:block md:col-span-4  h-full">
+          <section className="  hidden md:block md:col-span-5  lg:col-span-4  h-[90vh]">
             <Cart></Cart>
           </section>
         </section>
