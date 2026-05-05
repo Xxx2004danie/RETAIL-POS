@@ -22,8 +22,40 @@ let addProduct = async (req, res) => {
 
 let getAllProduct = async (req, res) => {
   try {
+    // FILTERING DATA BASED ON CATEGORY
+    let category = req.query.category;
+    let filter = {};
+    if (category && category.trim() !== "") {
+      filter.category = category;
+    }
     // getting products
-    let products = await Products.find();
+    let query = Products.find(filter);
+
+    //SORTING
+    if (req.query.sort) {
+      let Value = req.query.sort;
+      Value.split(",").join(" ");
+      query = query.sort(Value);
+    }
+
+    // PAGINATION
+    let page = Number(req.query.page);
+    if (!page || page < 1) {
+      page = 1;
+    }
+    let limit = Number(req.query.limit) || 10;
+    let skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    // EXECUTING QUERY
+    let products = await query;
+    if (products.length === 0) {
+      return res.status(200).json({
+        status: "success",
+        message: "no products",
+      });
+    }
 
     res.status(200).json({
       status: "successful",

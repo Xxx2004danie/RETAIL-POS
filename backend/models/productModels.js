@@ -16,6 +16,7 @@ let productSchema = new mongoose.Schema({
       "household",
       "cosmetics",
       "electronics",
+      "accessories",
       "others",
     ],
   },

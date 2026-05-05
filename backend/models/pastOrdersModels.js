@@ -8,17 +8,15 @@ let pastOrderSchema = new mongoose.Schema({
 
   items: [
     {
-      namesofitems: [String],
+      namesofitem: String,
       quantity: {
         type: Number,
         required: true,
       },
-      price: [
-        {
-          type: Number,
-          required: true,
-        },
-      ],
+      price: {
+        type: Number,
+        required: true,
+      },
     },
   ],
 
