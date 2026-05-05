@@ -46,7 +46,7 @@ export default function ProductList({ onChangeOrder }) {
           return (
             <button
               onClick={onChangeOrders}
-              className=" flex flex-col  items-center justify-center  bg-gray-50  text-neutral-900  border-2 border-white hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
+              className=" flex flex-col  items-center justify-center  bg-gray-50 h-25 md:h-auto  text-neutral-900  border-2 border-white hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
             >
               <p className="text-sm text-blue-400 ">{product.name}</p>
               <h1 className="text-lg font-bold ">{product.prize}</h1>

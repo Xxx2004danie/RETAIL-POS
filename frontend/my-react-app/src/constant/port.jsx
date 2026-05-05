@@ -1,0 +1,1 @@
+ export let globalUrl = "http://localhost:5000/"
