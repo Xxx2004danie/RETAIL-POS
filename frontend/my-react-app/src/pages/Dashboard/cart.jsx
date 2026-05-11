@@ -15,7 +15,7 @@ function Cart({ onShowCart }) {
   let [isAdd, setIsAdd] = useState(true);
   let { orders, onChangeOrders } = useContext(OrderContext);
   return (
-    <section className=" z-10 absolute md:static top-0 right-0 h-screen md:h-[90%]  lg:h-[90vh]w-full flex flex-col items-start bg-white">
+    <section className=" z-10 absolute md:static top-0 right-0 h-screen md:h-[90%]  lg:h-[90vh] w-full flex flex-col items-start bg-white">
       <header className="w-full flex flex-row justify-between p-4 h-[10%]">
         <h1 className="text-neutral-900 font-extrabold">current order</h1>
         <i className="flex gap-1 text-red-500">

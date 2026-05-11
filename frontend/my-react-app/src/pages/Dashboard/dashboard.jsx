@@ -1,5 +1,4 @@
-import { memo, useReducer } from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, memo, useReducer } from "react";
 import SideBar from "./sidebar";
 import { OrderContext } from "../../App.jsx";
 import { ReducerContext } from "../../App.jsx";
@@ -16,9 +15,25 @@ import {
   FaRegTrashCan,
 } from "react-icons/fa6";
 
-function Sale({ showCart, onShowCart }) {
+//GLOBAL URL
+import { globalUrl } from "../../constant/port";
+// API CALL
+import getAllProduct from "../../service/productApi.jsx";
 
+function Sale({ showCart, onShowCart }) {
   let { orders, onChangeOrders } = useContext(OrderContext);
+  let { state, dispatch } = useContext(ReducerContext);
+
+  // FETCHING PRODUCTS
+  useEffect(() => {
+    getAllProduct(`${globalUrl}/products`).then((data) => {
+      dispatch({
+        type: "show_products",
+        products: data,
+      });
+    });
+  }, []);
+
   return (
     <main className="md:grid md:grid-cols-14 h-screen md:gap-0 md:w-full">
       {/*Sidebar*/}

@@ -2,7 +2,7 @@ const globalUrl = require('../constant/port');
 
 
 // GET USERS
-let getAllUsers = async () => {
+let getAllUsers = async (url) => {
     try {
         let response = await fetch(url);
         
@@ -20,7 +20,7 @@ let getAllUsers = async () => {
 }
 
 // CREATING USERS
-let createUser = async (data) => {
+let createUser = async (url , data) => {
     try{
         let response = await fetch(url, {
             method: "POST",
@@ -43,9 +43,9 @@ let createUser = async (data) => {
 }
 
 // DELETE USERS
-let deleteUser = async (data) => {
+let deleteUser = async (url, data) => {
     try { 
-       let response = await fetch(URL, {
+       let response = await fetch(url, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -63,4 +63,11 @@ let deleteUser = async (data) => {
         console.error("could not delete user", error)
     }
 }
+
+module.exports = {
+  getAllUsers,
+  createUser,
+   deleteUser 
+};
+
 

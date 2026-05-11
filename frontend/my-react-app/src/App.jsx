@@ -13,87 +13,24 @@ import Users from "./pages/Users/user.jsx";
 import SalesHistory from "./pages/SalesHistory/salehistory.jsx";
 import Inventory from "./pages/Inventory/inventory1.jsx";
 import Sale from "./pages/Dashboard/dashboard.jsx";
+//Globalurl
+let globalUrl = require("./constant/port.jsx");
+// API CALLS
+let { createProduct, getAllProduct } = require("./service/productApi.jsx");
+let { getAllUsers, createUser, deleteUser } = require("./service/userApi.jsx");
+let { getAllSales, createSale, deleteSale } = require("./service/salesApi.jsx");
 
 // context for global state
 export let SideBarContext = createContext(0);
 export let OrderContext = createContext(0);
 export let ReducerContext = createContext();
 
-//user details
-let product = [
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "Bread",
-    prize: "$500",
-  },
-  {
-    name: "fanta",
-    prize: "$500",
-  },
-  {
-    name: "malt",
-    prize: "$1000",
-  },
-  {
-    name: "perfume",
-    prize: "$5000",
-  },
-];
-
-//user details
-let user = [
-  {
-    short: "sw",
-    name: "sheriff",
-    email: "sheriff@gmail.com",
-    role: "admin",
-  },
-];
 // initial state for reducer
 let initialState = {
-  products: [...product],
+  products: [],
   orders: [],
   sales: [],
-  users: [...user],
+  users: [],
 };
 
 // reducer
@@ -102,21 +39,21 @@ function reducer(state, action) {
     case "show_users": {
       return {
         ...state,
-        users: [...state.users, ...action.users],
+        users: [...state.users, ...(action.user || [])],
       };
     }
 
     case "show_products": {
       return {
         ...state,
-        products: [...state.product, ...action.products],
+        products: [...state.products, ...(action.products || [])],
       };
     }
 
     case "show_sales": {
       return {
         ...state,
-        sales: [...state.sales, ...action.sales],
+        sales: [...state.sales, ...(action.sales || [])],
       };
     }
 
@@ -131,29 +68,15 @@ function App() {
   let [orders, setOrders] = useState(0);
   let [state, dispatch] = useReducer(reducer, initialState);
 
-  // fetching user details
-  let users = useCallback(() => {
-    useEffect(() => {
-      async function getUsers() {
-        try {
-          let response = await fetch("http://localhost:5000/api/v1/users");
-          let users = await response.json();
-
-          dispatch({
-            type: "show_users",
-            data: users,
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      }
-
-      // get users
-      getUsers();
-    }, []);
+  // FETCHING PRODUCTS
+  useEffect(() => {
+    getAllProduct(`${globalUrl}/products`).then((data) => {
+      dispatch({
+        type: "show products",
+        user: data,
+      });
+    });
   }, []);
-
-  users();
 
   // to show and remove sidebar
   function onShowSideBar() {
@@ -174,7 +97,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ReducerContext.Provider value={state}>
+      <ReducerContext.Provider value={state, dispatch}>
         <SideBarContext.Provider
           value={{ showSideBar, onShowSideBar, onCloseSideBar }}
         >
