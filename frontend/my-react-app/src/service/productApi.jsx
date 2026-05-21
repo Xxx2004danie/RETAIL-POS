@@ -1,7 +1,4 @@
-const globalUrl = require("../constant/port");
-
-// CREATING PRODUCT
-let createProduct = async (url, postData) => {
+export let createProduct = async (url, postData) => {
   try {
     let response = await fetch(url, {
       method: "POST",
@@ -24,18 +21,18 @@ let createProduct = async (url, postData) => {
   }
 };
 
-// FETCHING ALL PRODUCT DATA FROM THE SERVER
-let getAllProduct = async (url) => {
+export let getAllProduct = async (url) => {
   try {
     let response = await fetch(url);
-    let data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("could not get products", error);
-  }
-};
 
-module.exports = {
-  createProduct,
-  getAllProduct,
+    // check error
+    if (!response.ok) {
+      throw new Error(`http error ${response.status}`);
+    }
+
+    let productObj = await response.json();
+    return productObj;
+  } catch (error) {
+    console.error("Could not get all products:", error.message);
+  }
 };

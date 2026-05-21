@@ -13,12 +13,7 @@ import Users from "./pages/Users/user.jsx";
 import SalesHistory from "./pages/SalesHistory/salehistory.jsx";
 import Inventory from "./pages/Inventory/inventory1.jsx";
 import Sale from "./pages/Dashboard/dashboard.jsx";
-//Globalurl
-let globalUrl = require("./constant/port.jsx");
-// API CALLS
-let { createProduct, getAllProduct } = require("./service/productApi.jsx");
-let { getAllUsers, createUser, deleteUser } = require("./service/userApi.jsx");
-let { getAllSales, createSale, deleteSale } = require("./service/salesApi.jsx");
+
 
 // context for global state
 export let SideBarContext = createContext(0);
@@ -39,21 +34,21 @@ function reducer(state, action) {
     case "show_users": {
       return {
         ...state,
-        users: [...state.users, ...(action.user || [])],
+        users: [...(action.user || [])],
       };
     }
 
     case "show_products": {
       return {
         ...state,
-        products: [...state.products, ...(action.products || [])],
+        products: [ ...(action.products || [])],
       };
     }
 
     case "show_sales": {
       return {
         ...state,
-        sales: [...state.sales, ...(action.sales || [])],
+        sales: [ ...(action.sales || [])],
       };
     }
 
@@ -68,15 +63,7 @@ function App() {
   let [orders, setOrders] = useState(0);
   let [state, dispatch] = useReducer(reducer, initialState);
 
-  // FETCHING PRODUCTS
-  useEffect(() => {
-    getAllProduct(`${globalUrl}/products`).then((data) => {
-      dispatch({
-        type: "show products",
-        user: data,
-      });
-    });
-  }, []);
+
 
   // to show and remove sidebar
   function onShowSideBar() {
@@ -97,7 +84,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ReducerContext.Provider value={state, dispatch}>
+      <ReducerContext.Provider value={[state, dispatch]}>
         <SideBarContext.Provider
           value={{ showSideBar, onShowSideBar, onCloseSideBar }}
         >

@@ -1,8 +1,11 @@
-import { useContext ,useReducer} from "react";
+import { useContext, useEffect, useReducer } from "react";
 import Button from "../../components/ui/button";
 import SearchBar from "../../components/ui/seachbar";
 import { ReducerContext } from "../../App.jsx";
 import { OrderContext } from "../../App";
+
+// API CALL
+import { getAllProduct, createProduct } from "../../service/productApi.jsx";
 
 import {
   FaCartShopping,
@@ -11,9 +14,24 @@ import {
   FaMobileScreen,
   FaRegTrashCan,
 } from "react-icons/fa6";
+
+//GLOBAL URL
+import { globalUrl } from "../../constant/port";
+
 export default function ProductList({ onChangeOrder }) {
-  let state = useContext(ReducerContext);
   let { orders, onChangeOrders } = useContext(OrderContext);
+  let [state, dispatch] = useContext(ReducerContext);
+
+  // FETCHING PRODUCTS
+  useEffect(() => {
+    getAllProduct(`${globalUrl}/products`).then((data) => {
+      console.log(data);
+      dispatch({
+        type: "show_products",
+        products: data.data,
+      });
+    });
+  }, []);
 
   // product category button style
   let btnSyles =
@@ -41,19 +59,20 @@ export default function ProductList({ onChangeOrder }) {
 
       {/* Box 3 - Product Buttons Grid */}
 
-      <section className="  w-full flex-1 overflow-y-auto grid grid-cols-2 md:grid-cols-3    p-1 gap-1">
+      <ul className="  w-full flex-1 overflow-y-auto grid grid-cols-2 md:grid-cols-3    p-1 gap-1">
         {state.products.map((product) => {
           return (
-            <button
+            <li
+              C
               onClick={onChangeOrders}
               className=" flex flex-col  items-center justify-center  bg-gray-50 h-25 md:h-auto  text-neutral-900  border-2 border-white hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
             >
               <p className="text-sm text-blue-400 ">{product.name}</p>
-              <h1 className="text-lg font-bold ">{product.prize}</h1>
-            </button>
+              <h1 className="text-lg font-bold ">{product.price}</h1>
+            </li>
           );
         })}
-      </section>
+      </ul>
     </section>
   );
 }

@@ -1,9 +1,22 @@
 import MenuIcon from "../../components/layout/layout";
 import UserModalForm from "../../modal/adduserModal";
 import { ReducerContext } from "../../App";
-import { useReducer, useContext } from "react";
+import { useReducer, useContext, useEffect } from "react";
+import { globalUrl } from "../../constant/port.jsx";
+import { getAllUsers, deleteUser, createUser } from "../../service/userApi.jsx";
+
 export default function Userlist({ userModal, onChangeModal }) {
-  let state = useContext(ReducerContext);
+  let [state, dispatch] = useContext(ReducerContext);
+
+  //GETTING ALL USERS
+  useEffect(() => {
+    getAllUsers(`${globalUrl}/users`).then((users) => {
+      dispatch({
+        type: "show_users",
+        users: users.data.users,
+      });
+    });
+  }, []);
 
   return (
     <section className="relative h-screen bg-gray-100 ">
@@ -21,10 +34,13 @@ export default function Userlist({ userModal, onChangeModal }) {
         </button>
 
         {/* Users */}
-        <section className="grid grid-cols-1 lg:flex-1 overflow-y-auto md:grid-cols-2 lg:grid-cols-3 gap-3 ">
+        <ul className="grid grid-cols-1 lg:flex-1 overflow-y-auto md:grid-cols-2 lg:grid-cols-3 gap-3 ">
           {state.users.map((user) => {
             return (
-              <article className=" flex flex-col gap-2 md:gap-3 p-5 border border-gray-300 bg-white rounded-[10px] h-auto ">
+              <li
+                key={user._id}
+                className=" flex flex-col gap-2 md:gap-3 p-5 border border-gray-300 bg-white rounded-[10px] h-auto "
+              >
                 <header className="flex justify-between items-center">
                   <p className="bg-blue-200 text-blue-900 font-extrabold rounded-[50px] px-3 py-2">
                     {user.short}
@@ -48,10 +64,10 @@ export default function Userlist({ userModal, onChangeModal }) {
                   <p>icon</p>
                   <p>icon</p>
                 </section>
-              </article>
+              </li>
             );
           })}
-        </section>
+        </ul>
       </section>
       {/* user Modal */}
       {userModal && <UserModalForm onChangeModal={onChangeModal} />}

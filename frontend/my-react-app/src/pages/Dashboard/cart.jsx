@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa6";
 
 function Cart({ onShowCart }) {
-  let [isAdd, setIsAdd] = useState(true);
+  let [isAdd, setIsAdd] = useState(false);
   let { orders, onChangeOrders } = useContext(OrderContext);
   return (
     <section className=" z-10 absolute md:static top-0 right-0 h-screen md:h-[90%]  lg:h-[90vh] w-full flex flex-col items-start bg-white">
