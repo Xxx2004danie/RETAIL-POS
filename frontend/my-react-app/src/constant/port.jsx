@@ -1,1 +1,1 @@
-export let globalUrl = "http://localhost:5000/api/v1";
+export let globalUrl = "http://sheriff-1.onrender.com";
