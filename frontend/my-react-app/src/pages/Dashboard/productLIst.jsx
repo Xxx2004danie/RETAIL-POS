@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useReducer } from "react";
+import { useState, useContext, useEffect } from "react";
 import Button from "../../components/ui/button";
 import SearchBar from "../../components/ui/seachbar";
 import { ReducerContext } from "../../App.jsx";
@@ -119,16 +119,16 @@ export default function ProductList({ onChangeOrder }) {
           return (
             <li
               key={product._id}
-              onClick={ () => {
+              onClick={() => {
                 onChangeOrders();
                 dispatch({
-                  type : "add_orders",
-                  orders : {
-                  name : product.name,
-                  price: product.price
-                }
-                })
-              }} 
+                  type: "add_orders",
+                  orders: {
+                    name: product.name,
+                    price: product.price,
+                  },
+                });
+              }}
               className=" flex flex-col  items-center justify-center  bg-gray-50 h-25 md:h-auto  text-neutral-900  border-2 border-white hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
             >
               <p className="text-sm text-blue-400 ">{product.name}</p>
