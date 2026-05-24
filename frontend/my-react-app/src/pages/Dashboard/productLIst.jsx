@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer } from "react";
+import { useState, useContext, useEffect, useReducer } from "react";
 import Button from "../../components/ui/button";
 import SearchBar from "../../components/ui/seachbar";
 import { ReducerContext } from "../../App.jsx";
@@ -21,17 +21,46 @@ import { globalUrl } from "../../constant/port";
 export default function ProductList({ onChangeOrder }) {
   let { orders, onChangeOrders } = useContext(OrderContext);
   let [state, dispatch] = useContext(ReducerContext);
+  let [productName, setProductName] = useState("");
 
   // FETCHING PRODUCTS
   useEffect(() => {
-    getAllProduct(`${globalUrl}/products`).then((data) => {
+    getProducts(`${globalUrl}/products`);
+  }, []);
+
+  // GET ALL PRODUCT
+  function getProducts(url) {
+    getAllProduct(url).then((data) => {
       console.log(data);
       dispatch({
         type: "show_products",
         products: data.data,
       });
     });
-  }, []);
+  }
+
+  //HANDLER FOR UPDATING PRODUCTNAME STATE
+  function change(e) {
+    setProductName(e.target.value);
+  }
+
+  // fetching a single product
+  function getSingleProduct(e) {
+    e.preventDefault();
+    getAllProduct(`${globalUrl}/products/${productName}`)
+      .then((product) => {
+        dispatch({
+          type: "show_products",
+          products: product.data,
+        });
+      })
+      .catch((error) => {
+        console.log("error getting product from the client", error);
+      });
+  }
+
+  // STORING ALL PRODUCT CATEGORY VALUE IN SET
+  let category = [...new Set(state.products.map((p) => p.category))];
 
   // product category button style
   let btnSyles =
@@ -50,20 +79,46 @@ export default function ProductList({ onChangeOrder }) {
       </nav>
 
       {/* search bar */}
-      <SearchBar placeholder="search product name" />
+      <SearchBar
+        placeholder="search product name"
+        StateValue={productName}
+        handler={change}
+        submit={getSingleProduct}
+      />
 
       {/* porduct categories */}
-      <article className="flex flex-row p-3  shrink-0 ">
-        <Button className={btnSyles}>all</Button>
+      <article className="flex flex-row  gap-x-1 p-3  shrink-0 md: w-full overflow-x-auto">
+        <Button
+          className={btnSyles}
+          onGet={() => getProducts(`${globalUrl}/products`)}
+        >
+          all
+        </Button>
+        {
+          // DISPLAYING CATEGORY VALUES STORED IN SET
+          category.map((values) => {
+            return (
+              <button
+                key={values}
+                className={btnSyles}
+                onClick={() =>
+                  getProducts(`${globalUrl}/products?category=${values}`)
+                }
+              >
+                {values}
+              </button>
+            );
+          })
+        }
       </article>
 
       {/* Box 3 - Product Buttons Grid */}
 
-      <ul className="  w-full flex-1 overflow-y-auto grid grid-cols-2 md:grid-cols-3    p-1 gap-1">
+      <ul className="  w-full flex-1  items-start  justify-center overflow-y-auto grid grid-cols-2 md:grid-cols-3 p-6 gap-1  ">
         {state.products.map((product) => {
           return (
             <li
-              C
+              key={product._id}
               onClick={onChangeOrders}
               className=" flex flex-col  items-center justify-center  bg-gray-50 h-25 md:h-auto  text-neutral-900  border-2 border-white hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
             >

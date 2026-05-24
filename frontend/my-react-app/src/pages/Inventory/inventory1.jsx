@@ -3,6 +3,7 @@ import MenuIcon from "../../components/layout/layout.jsx";
 import SearchBar from "../../components/ui/seachbar.jsx";
 import InventoryUi from "./inventorycontent.jsx";
 import SideBar from "../Dashboard/sidebar.jsx";
+
 import {
   FaXmark,
   FaRegTrashCan,

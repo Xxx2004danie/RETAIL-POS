@@ -9,6 +9,6 @@ const {
 let router = express.Router();
 
 router.route("/").post(addProduct).get(getAllProduct).delete(deleteAllProduct);
-router.route("/:id").get(getOneItem);
+router.route("/:name").get(getOneItem);
 
 module.exports = router;

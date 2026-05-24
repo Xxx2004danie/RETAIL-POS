@@ -34,21 +34,21 @@ function reducer(state, action) {
     case "show_users": {
       return {
         ...state,
-        users: [...(action.user || [])],
+        users: action.users || [],
       };
     }
 
     case "show_products": {
       return {
         ...state,
-        products: [ ...(action.products || [])],
+        products: action.products || [],
       };
     }
 
     case "show_sales": {
       return {
         ...state,
-        sales: [ ...(action.sales || [])],
+        sales: [...(action.sales || [])],
       };
     }
 

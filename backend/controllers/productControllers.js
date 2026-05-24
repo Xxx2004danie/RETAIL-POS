@@ -73,10 +73,11 @@ let getAllProduct = async (req, res) => {
 
 let getOneItem = async (req, res) => {
   try {
-    let product = await Products.findById(req.params.id);
+    let product = await Products.find({ name: req.params.name });
+    console.log(req.params.name);
 
     // checking if no product
-    if (!product) {
+    if (product.length === 0) {
       return res.status(404).json({
         status: "failed",
         message: " not found",
@@ -96,10 +97,9 @@ let getOneItem = async (req, res) => {
   }
 };
 
-
 // deleting all product
 
-let deleteAllProduct = async(req, res) => {
+let deleteAllProduct = async (req, res) => {
   try {
     let data = await Products.deleteMany();
     if (data.length === 0) {
@@ -113,14 +113,13 @@ let deleteAllProduct = async(req, res) => {
       message: "deleted all products",
     });
   } catch (error) {
-      res.status(500).json({
-        status: "error",
-        message: "error",
-        error: error.message
-      });
+    res.status(500).json({
+      status: "error",
+      message: "error",
+      error: error.message,
+    });
   }
-
-}
+};
 
 // EXPORTTING ALL FUNCTIONS
 

@@ -34,5 +34,6 @@ export let getAllProduct = async (url) => {
     return productObj;
   } catch (error) {
     console.error("Could not get all products:", error.message);
+     throw error;
   }
 };

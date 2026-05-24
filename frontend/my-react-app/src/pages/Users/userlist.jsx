@@ -10,12 +10,17 @@ export default function Userlist({ userModal, onChangeModal }) {
 
   //GETTING ALL USERS
   useEffect(() => {
-    getAllUsers(`${globalUrl}/users`).then((users) => {
-      dispatch({
-        type: "show_users",
-        users: users.data.users,
+    getAllUsers(`${globalUrl}/users`)
+      .then((users) => {
+        dispatch({
+          type: "show_users",
+          users: users.data.users,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        throw error;
       });
-    });
   }, []);
 
   return (
@@ -43,11 +48,9 @@ export default function Userlist({ userModal, onChangeModal }) {
               >
                 <header className="flex justify-between items-center">
                   <p className="bg-blue-200 text-blue-900 font-extrabold rounded-[50px] px-3 py-2">
-                    {user.short}
+                    {user.phoneNumber}
                   </p>
-                  <button className="bg-blue-200 text-blue-900 text-[11px] font-bold  px-1 rounded-[7px] ">
-                    {user.status}
-                  </button>
+                  <button className="bg-blue-200 text-blue-900 text-[11px] font-bold  px-1 rounded-[7px] "></button>
                 </header>
 
                 <section>

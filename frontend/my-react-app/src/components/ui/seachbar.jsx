@@ -3,15 +3,27 @@ import {
   FaMagnifyingGlass,
  
 } from "react-icons/fa6";
-export default function SearchBar({ placeholder }) {
+export default function SearchBar({
+  placeholder,
+  StateValue,
+  handler,
+  submit,
+}) {
   return (
-    <form action="" className="w-full relative px-2">
-      <FaMagnifyingGlass className="absolute text-[11px] text-gray-500 top-1/2 left-3 -translate-y-1/2" />
+    <form
+      onSubmit={submit}
+      action=""
+      className="w-full flex  bg-gray-200 items-center  px-4"
+    >
+      <FaMagnifyingGlass className=" text-[11px] text-gray-500 " />
       <input
         type="text"
+        value={StateValue}
         placeholder={placeholder}
-        className=" outline-0 w-full bg-gray-50 rounded-[10px] py-2 pl-7 text-[11px] text-gray-400 font-medium"
+        className=" flex-1  bg-transparent outline-0 w-full rounded-[10px] py-4 pl-4 text-[11px] text-gray-800 font-medium"
+        onChange={handler}
       />
+      <button type="submit">search</button>
     </form>
   );
 }

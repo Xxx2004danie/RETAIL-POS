@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useContext, useReducer, useEffect } from "react";
 import SearchBar from "../../components/ui/seachbar.jsx";
 import ProductModalForm from "../../modal/addproductModal.jsx";
 import { FaXmark, FaRegTrashCan, FaPencil } from "react-icons/fa6";
 
+import { ReducerContext } from "../../app.jsx";
+import { getAllProduct, createProduct } from "../../service/productApi.jsx";
+import { globalUrl } from "../../constant/port.jsx";
+
 export default function InventoryUi() {
   let [showModal, setShowModal] = useState(false);
+  let [state, dispatch] = useContext(ReducerContext);
 
   // toggle inventory modal
   function onShow() {
@@ -14,6 +19,16 @@ export default function InventoryUi() {
   function onClose() {
     setShowModal(false);
   }
+
+  // GETTING ALL PRODUCT
+  useEffect(() => {
+    getAllProduct(`${globalUrl}/products`).then((value) => {
+      dispatch({
+        type: "show_products",
+        data: value.data,
+      });
+    });
+  }, []);
 
   return (
     <section className="flex flex-col  relative gap-4 p-4 bg-gray-200 h-[90vh]">
@@ -43,35 +58,28 @@ export default function InventoryUi() {
           <h1 className="shrink-0">Actions</h1>
         </article>
         {/* table rows */}
-        <Rows />
-        <Rows />
-        <Rows />
-        <Rows />
-        <Rows />
-        <Rows />
-        <Rows />
-        <Rows />
-        <Rows />
-        <Rows />
-        <Rows />
+        {state.products.map((product) => {
+          return (
+            <article
+              key={product._id}
+              className="bg-white w-full flex items-center justify-around gap-12 p-4 border-t border-gray-300"
+            >
+              <h1 className="font-bold text-neutral-950  ">{product.name}</h1>
+              <p className="bg-blue-300  text-blue-600 px-2 rounded-[7px]">
+                cash
+              </p>
+              <p>{product.stock}</p>
+              <h2 className="text-neutral-950 font-bold">{`$${product.price}`}</h2>
+              <article className="flex gap-3">
+                <FaRegTrashCan />
+                <FaPencil />
+              </article>
+            </article>
+          );
+        })}
       </section>
 
       {showModal && <ProductModalForm onClose={onClose} />}
     </section>
-  );
-}
-
-function Rows() {
-  return (
-    <article className="bg-white w-full flex items-center justify-around gap-12 p-4 border-t border-gray-300">
-      <h1 className="font-bold text-neutral-950  ">cocacola</h1>
-      <p className="bg-blue-300  text-blue-600 px-2 rounded-[7px]">cash</p>
-      <p>2</p>
-      <h2 className="text-neutral-950 font-bold">$4.50</h2>
-      <article className="flex gap-3">
-        <FaRegTrashCan />
-        <FaPencil />
-      </article>
-    </article>
   );
 }
