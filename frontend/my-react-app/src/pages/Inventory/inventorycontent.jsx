@@ -25,8 +25,11 @@ export default function InventoryUi() {
     getAllProduct(`${globalUrl}/products`).then((value) => {
       dispatch({
         type: "show_products",
-        data: value.data,
+        products: value.data,
       });
+    }).catch((error) => {
+      console.log(error);
+      throw error
     });
   }, []);
 
@@ -61,16 +64,16 @@ export default function InventoryUi() {
         {state.products.map((product) => {
           return (
             <article
-              key={product._id}
-              className="bg-white w-full flex items-center justify-around gap-12 p-4 border-t border-gray-300"
+             key={product._id}
+              className="bg-white w-full flex items-center justify-around gap-12 p-4 border-t border-gray-300 flex-1 basis-0"
             >
-              <h1 className="font-bold text-neutral-950  ">{product.name}</h1>
-              <p className="bg-blue-300  text-blue-600 px-2 rounded-[7px]">
+              <h1 className="font-bold text-neutral-950  shrink-0 grow-0 flex-1 basis-0">{product.name}</h1>
+              <p className="bg-blue-300  text-blue-600 px-2 rounded-[7px] shrink-0 grow-0 flex-1 basis-0">
                 cash
               </p>
-              <p>{product.stock}</p>
-              <h2 className="text-neutral-950 font-bold">{`$${product.price}`}</h2>
-              <article className="flex gap-3">
+              <p className = " shrink-0 grow-0">{product.stock}</p>
+              <h2 className="text-neutral-950 font-bold shrink-0 grow-0  flex-1 basis-0">{`$${product.price}`}</h2>
+              <article className="flex gap-3 shrink-0 grow-0 flex-1 basis-0">
                 <FaRegTrashCan />
                 <FaPencil />
               </article>

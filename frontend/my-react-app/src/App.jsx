@@ -52,6 +52,13 @@ function reducer(state, action) {
       };
     }
 
+     case "add_orders": {
+      return {
+        ...state,
+        orders: [...state.orders, action.orders]
+      };
+    }
+
     default:
       return state;
   }
@@ -62,6 +69,11 @@ function App() {
   let [showCart, setShowCart] = useState(false);
   let [orders, setOrders] = useState(0);
   let [state, dispatch] = useReducer(reducer, initialState);
+
+  // ADD ITEMS TO CART
+  function addItemsToCart() {
+
+  }
 
 
 

@@ -63,13 +63,13 @@ export default function SalesList() {
             <section className="w-full flex-1 overflow-x-auto  overflow-y-auto bg-white border border-gray-200 rounded-[10px] lg:w-[80%]">
               {/* table header */}
               <article className="flex  text-white font-bold  bg-gray-700  gap-11 p-4">
-                <h1 className="shrink-0">Order Id</h1>
-                <h1 className="shrink-0">Date</h1>
-                <h1 className="shrink-0">Items</h1>
-                <h1 className="shrink-0">Total</h1>
-                <h1 className="shrink-0">Payment</h1>
-                <h1 className="shrink-0">Cashier</h1>
-                <h1 className="shrink-0">View</h1>
+                <h1 className="shrink-0 flex-1">Order Id</h1>
+                <h1 className="shrink-0 flex-1">Date</h1>
+                <h1 className="shrink-0 flex-1">Items</h1>
+                <h1 className="shrink-0 flex-1">Total</h1>
+                <h1 className="shrink-0 flex-1">Payment</h1>
+                <h1 className="shrink-0 flex-1">Cashier</h1>
+                <h1 className="shrink-0 flex-1">View</h1>
               </article>
 
               {/* table rows */}
@@ -96,21 +96,21 @@ export default function SalesList() {
 function TableRows() {
   let { showReceipt, onShow, onClose } = useContext(ReceiptContext);
   return (
-    <article className="bg-white flex items-center gap-14 px-4 py-2 border-t border-gray-300">
-      <h1 className="font-bold text-blue-800  ">ORD-1</h1>
-      <article className="leading-tight">
+    <article className="bg-white flex items-center gap-14 px-4 py-2 border-t border-gray-300 flex-1">
+      <h1 className="font-bold text-blue-800 flex-1 ">ORD-1</h1>
+      <article className="leading-tight flex-1">
         <p>2026</p>
         <p>04-1</p>
         <p>10:12</p>
       </article>
 
-      <p>2</p>
-      <h2 className="text-neutral-950 font-bold">$4.50</h2>
-      <button className="bg-blue-300  text-blue-600 px-2 rounded-[7px]">
+      <p className = "flex-1">2</p>
+      <h2 className="text-neutral-950 font-bold flex-1">$4.50</h2>
+      <button className="bg-blue-300  text-blue-600 px-2 rounded-[7px] flex-1">
         cash
       </button>
-      <h3 className="text-neutral-800 font-medium">sarah</h3>
-      <p onClick={onShow}>
+      <h3 className="text-neutral-800 font-medium  flex-1">sarah</h3>
+      <p className = "flex-1" onClick={onShow}>
         <TbEyeFilled />
       </p>
     </article>
