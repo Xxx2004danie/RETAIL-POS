@@ -30,6 +30,7 @@ export default function ProductList({ onChangeOrder }) {
   // FETCHING PRODUCTS
   useEffect(() => {
     getProducts(`${globalUrl}/products`);
+    console.log(import.meta.env.VITE_API_URL);
   }, []);
 
   // GET ALL PRODUCT
