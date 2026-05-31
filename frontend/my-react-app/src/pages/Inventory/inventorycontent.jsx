@@ -3,7 +3,7 @@ import SearchBar from "../../components/ui/seachbar.jsx";
 import ProductModalForm from "../../modal/addproductModal.jsx";
 import { FaXmark, FaRegTrashCan, FaPencil } from "react-icons/fa6";
 
-import { ReducerContext } from "../../app.jsx";
+import { ReducerContext } from "../../App.jsx";
 import { getAllProduct, createProduct } from "../../service/productApi.jsx";
 import { globalUrl } from "../../constant/port.jsx";
 
