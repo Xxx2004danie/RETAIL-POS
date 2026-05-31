@@ -26,6 +26,7 @@ let initialState = {
   orders: [],
   sales: [],
   users: [],
+   totalCostOfAllItem: null,
 };
 
 // reducer

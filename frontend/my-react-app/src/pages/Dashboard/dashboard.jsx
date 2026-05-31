@@ -18,7 +18,10 @@ import {
 
 
 function Sale({ showCart, onShowCart }) {
+  // QUANTITY OF ALL  ITEM IN THE CART
   let { orders, onChangeOrders } = useContext(OrderContext);
+
+
 
   return (
     <main className="md:grid md:grid-cols-14 h-screen md:gap-0 md:w-full">
@@ -33,11 +36,11 @@ function Sale({ showCart, onShowCart }) {
         <section className="md:grid md:grid-cols-12 h-[90vh] md:border-t md:border-gray-200 ">
           {/* product display grid */}
           <section className="  md:col-span-6 lg:col-span-8 h-[90vh]">
-            <ProductList />
+            <ProductList  />
           </section>
           {/* chart */}
           <section className="  hidden md:block md:col-span-5  lg:col-span-4  h-[90vh]">
-            <Cart></Cart>
+            <Cart />
           </section>
         </section>
 

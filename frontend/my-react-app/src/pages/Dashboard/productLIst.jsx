@@ -19,9 +19,13 @@ import {
 import { globalUrl } from "../../constant/port";
 
 export default function ProductList({ onChangeOrder }) {
+
   let { orders, onChangeOrders } = useContext(OrderContext);
   let [state, dispatch] = useContext(ReducerContext);
   let [productName, setProductName] = useState("");
+
+  // STORING THIS STATE PROPERTY ("quantityOfItem")
+
 
   // FETCHING PRODUCTS
   useEffect(() => {
@@ -124,8 +128,13 @@ export default function ProductList({ onChangeOrder }) {
                 dispatch({
                   type: "add_orders",
                   orders: {
+                    id: orders.length,
                     name: product.name,
                     price: product.price,
+                    itemQuantity: 1 ,
+                    totalCost: function () {
+                                                return this.itemQuantity * this.price;
+                                                 },
                   },
                 });
               }}
