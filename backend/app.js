@@ -16,8 +16,8 @@ app.use(cors());
 app.use(express.json());
 
 // ROUTES
-app.use("/api/v1/products", ProductRoute);
-app.use("/api/v1/users", usersRoute);
-app.use("/api/v1/sales", SalesRoute);
+app.use("/products", ProductRoute);
+app.use("/users", usersRoute);
+app.use("/sales", SalesRoute);
 
 module.exports = app;
