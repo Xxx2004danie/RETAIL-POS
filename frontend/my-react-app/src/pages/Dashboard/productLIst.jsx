@@ -30,7 +30,6 @@ export default function ProductList({ onChangeOrder }) {
   // FETCHING PRODUCTS
   useEffect(() => {
     getProducts(`${globalUrl}/products`);
-    console.log(import.meta.env.VITE_API_URL);
   }, []);
 
   // GET ALL PRODUCT
@@ -52,7 +51,7 @@ export default function ProductList({ onChangeOrder }) {
   // fetching a single product
   function getSingleProduct(e) {
     e.preventDefault();
-    getAllProduct(`${globalUrl}/products/${productName}`)
+    getAllProduct(`${globalUrl}/products`)
       .then((product) => {
         dispatch({
           type: "show_products",
@@ -60,6 +59,7 @@ export default function ProductList({ onChangeOrder }) {
         });
       })
       .catch((error) => {
+        console.log(globalUrl);
         console.log("error getting product from the client", error);
       });
   }
