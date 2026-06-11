@@ -20,7 +20,7 @@ let port = process.env.PORT;
 // STARTING SERVER
 app.listen(port, (err) => {
   console.log("starting server...");
-  console.log(process.env.NODE_ENV);
+ 
 });
 
 

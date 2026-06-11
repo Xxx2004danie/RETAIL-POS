@@ -24,7 +24,7 @@ function Cart({ onShowCart }) {
       <header className="w-full flex flex-row justify-between p-4 h-[10%]">
         <h1 className="text-neutral-900 font-extrabold">current order</h1>
         <i className="flex gap-1 text-red-500">
-          {orders}
+          {state.noItemSold}
           <strong className="text-gray-500">items</strong>
         </i>
         <p className="md:hidden">
@@ -35,30 +35,51 @@ function Cart({ onShowCart }) {
       {isAdd ? (
         <section className="flex-1  w-full h-[90%] ">
           <ul className="h-[60%] px-3 overflow-auto border-y border-gray-200">
-            {itemsArray.map((item) => {
+            {itemsArray.map((item, index) => {
               return (
-                <li className="  flex justify-between items-center p-3 gap-1  border-b border-gray-200">
-                  <article className="flex items-center gap-4  md:2">
-                    <article className="flex flex-col flex-1">
-                      <h1 className="text-neutral-900 font-bold">
-                        {item.name}
-                      </h1>
-                      <p className="text-gray-600 text-[10px]">{`$${item.price}`}</p>
-                    </article>
+                <li
+                  key={index}
+                  className="  flex justify-between items-center gap-3 p-2 border-b border-gray-200"
+                >
+                  <article className="flex flex-col flex-1">
+                    <h1 className="text-neutral-900 font-bold md:text-[12px]">
+                      {item.name}
+                    </h1>
+                    <p className="text-gray-600 text-[10px]">{`$${item.price}`}</p>
                   </article>
+
                   <button className="bg-gray-300 py-1 w-15 rounded-[10px] text-[10px] flex flex-row justify-around flex-1">
-                    <p onClick = {onDecreaseQuantityItem}>-</p>
+                    <p
+                      onClick={() =>
+                        dispatch({
+                          type: "decrease_item_QUANTITY",
+                          id: item.id,
+                        })
+                      }
+                    >
+                      -
+                    </p>
                     <p>{item.itemQuantity}</p>
-                    <p onClick = {onIncreaseQuantityItem}>+</p>
+                    <p
+                      onClick={() =>
+                        dispatch({
+                          type: "increase_item_QUANTITY",
+                          id: item.id,
+                        })
+                      }
+                    >
+                      +
+                    </p>
                   </button>
-                  <article className="flex items-center gap-3 flex-1">
-                    <p className="font-medium text-[12px]">
-                      {item.totalCost}
-                    </p>
-                    <p>
-                      <FaRegTrashCan />
-                    </p>
-                  </article>
+
+                  <p className="font-medium text-[12px]">{item.totalCost}</p>
+                  <p>
+                    <FaRegTrashCan
+                      onClick={() => {
+                        dispatch({ type: "delete_item", id: item.id });
+                      }}
+                    />
+                  </p>
                 </li>
               );
             })}

@@ -1,8 +1,8 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import Button from "../../components/ui/button";
 import SearchBar from "../../components/ui/seachbar";
 import { ReducerContext } from "../../App.jsx";
-import { OrderContext } from "../../App";
+import { OrderContext } from "../../App.jsx";
 
 // API CALL
 import { getAllProduct, createProduct } from "../../service/productApi.jsx";
@@ -18,14 +18,14 @@ import {
 //GLOBAL URL
 import { globalUrl } from "../../constant/port";
 
-export default function ProductList({ onChangeOrder }) {
-
-  let { orders, onChangeOrders } = useContext(OrderContext);
+function ProductList({ onChangeOrder }) {
   let [state, dispatch] = useContext(ReducerContext);
   let [productName, setProductName] = useState("");
 
-  // STORING THIS STATE PROPERTY ("quantityOfItem")
+  // ORDERED ITEM ID
+  const itemIdRef = useRef(0);
 
+  // STORING THIS STATE PROPERTY ("quantityOfItem")
 
   // FETCHING PRODUCTS
   useEffect(() => {
@@ -74,6 +74,8 @@ export default function ProductList({ onChangeOrder }) {
   let navBtnStyle =
     " flex gap-2 bg-white w-20 shrink-0 text-neutral-900 rounded-[10px] p-2  border-2 border-gray-200 hover:border-blue-200 cursor-pointer hover:bg-blue-100";
 
+  //CART
+  let itemId = 0;
   return (
     <section className="flex flex-col   bg-gray-300 w-full  h-[90vh] p-3 ">
       {/* product analysis */}
@@ -125,17 +127,15 @@ export default function ProductList({ onChangeOrder }) {
             <li
               key={product._id}
               onClick={() => {
-                onChangeOrders();
+                dispatch({ type: "increase_noItemSold" });
                 dispatch({
                   type: "add_orders",
                   orders: {
-                    id: orders.length,
+                    id: ++itemIdRef.current,
                     name: product.name,
                     price: product.price,
-                    itemQuantity: 1 ,
-                    totalCost: function () {
-                                                return this.itemQuantity * this.price;
-                                                 },
+                    itemQuantity: 1,
+                    totalCost: product.price,
                   },
                 });
               }}
@@ -150,3 +150,5 @@ export default function ProductList({ onChangeOrder }) {
     </section>
   );
 }
+
+export default ProductList;

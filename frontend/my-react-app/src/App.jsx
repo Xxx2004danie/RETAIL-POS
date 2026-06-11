@@ -22,11 +22,12 @@ export let ReducerContext = createContext();
 
 // initial state for reducer
 let initialState = {
+  revenue: "",
+  noItemSold: 0,
   products: [],
   orders: [],
   sales: [],
   users: [],
-   totalCostOfAllItem: null,
 };
 
 // reducer
@@ -53,12 +54,65 @@ function reducer(state, action) {
       };
     }
 
-     case "add_orders": {
+    case "add_orders": {
       return {
         ...state,
-        orders: [...state.orders, action.orders]
+        orders: [...state.orders, action.orders],
       };
     }
+
+    case "delete_item":
+      return {
+        ...state,
+        orders: state.orders.filter((a) => a.id !== action.id),
+        noItemSold: state.noItemSold > 0 && state.noItemSold - 1,
+      };
+
+    case "increase_noItemSold": {
+      return {
+        ...state,
+        noItemSold: state.noItemSold + 1,
+      };
+    }
+
+    // INCREASET ITEM QUANTITY
+    case "increase_item_QUANTITY":
+      return {
+        ...state,
+        orders: state.orders.map((item) => {
+          if (item.id === action.id) {
+            return {
+              ...item,
+              itemQuantity: item.itemQuantity + 1,
+              totalCost: item.price * (item.itemQuantity + 1),
+            };
+          }
+
+          return { ...item };
+        }),
+
+        noItemSold: state.noItemSold + 1,
+      };
+
+    // DECREASE ITEM QUANTITY
+    case "decrease_item_QUANTITY":
+      return {
+        ...state,
+        orders: state.orders.map((item) => {
+          if (item.id === action.id) {
+            return {
+              ...item,
+              itemQuantity: item.itemQuantity > 1 ? item.itemQuantity - 1 : 1,
+            };
+          }
+
+          return { ...item };
+        }),
+      };
+
+    // GET TOTAL SUM OF COST
+    case "total_cost":
+      return state.orders.reduce();
 
     default:
       return state;
@@ -68,28 +122,21 @@ function reducer(state, action) {
 function App() {
   let [showSideBar, setShowSideBar] = useState(false);
   let [showCart, setShowCart] = useState(false);
-  let [orders, setOrders] = useState(0);
   let [state, dispatch] = useReducer(reducer, initialState);
+  // quantity state of a specific item in the cart
+  let [quantityOfItem, setQuantityOfItem] = useState(1);
 
-  // ADD ITEMS TO CART
-  function addItemsToCart() {
-
-  }
-
-
-
-  // to show and remove sidebar
+  // SIDEBAR
+  // to show  sidebar
   function onShowSideBar() {
     setShowSideBar(true);
   }
-
+  // to remove sidebar
   function onCloseSideBar() {
     setShowSideBar(false);
   }
-  // to show and remove sidebar
-  function onChangeOrders() {
-    setOrders((order) => order + 1);
-  }
+
+  //CART
   // to show and remove cart
   function onShowCart() {
     setShowCart((showCart) => !showCart);
@@ -101,26 +148,22 @@ function App() {
         <SideBarContext.Provider
           value={{ showSideBar, onShowSideBar, onCloseSideBar }}
         >
-          <OrderContext.Provider value={{ orders, onChangeOrders }}>
-            <section className="relative">
-              {showSideBar && <SideBar />}
+          <section className="relative">
+            {showSideBar && <SideBar />}
 
-              {/* Routes */}
-              <section>
-                <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      <Sale showCart={showCart} onShowCart={onShowCart} />
-                    }
-                  ></Route>
-                  <Route path="/inventory" element={<Inventory />}></Route>
-                  <Route path="/users" element={<Users />}></Route>
-                  <Route path="/history" element={<SalesHistory />}></Route>
-                </Routes>
-              </section>
+            {/* Routes */}
+            <section>
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Sale showCart={showCart} onShowCart={onShowCart} />}
+                ></Route>
+                <Route path="/inventory" element={<Inventory />}></Route>
+                <Route path="/users" element={<Users />}></Route>
+                <Route path="/history" element={<SalesHistory />}></Route>
+              </Routes>
             </section>
-          </OrderContext.Provider>
+          </section>
         </SideBarContext.Provider>
       </ReducerContext.Provider>
     </BrowserRouter>
