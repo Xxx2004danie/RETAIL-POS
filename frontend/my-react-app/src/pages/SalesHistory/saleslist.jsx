@@ -3,9 +3,11 @@ import MenuIcon from "../../components/layout/layout";
 import showReceiptModal from "../../modal/showReceiptModal";
 import ReceiptModal from "../../modal/showReceiptModal";
 import { TbEyeFilled } from "react-icons/tb";
+import { ReducerContext } from "../../App";
 
 export let ReceiptContext = createContext();
 export default function SalesList() {
+  let [state, dispatch] = useContext(ReducerContext);
   let [showReceipt, setShowReceipt] = useState(false);
 
   // toggle showReceipt
@@ -39,7 +41,7 @@ export default function SalesList() {
               <article className=" bg-gray-50 border border-gray-300 p-4 rounded-[10px]">
                 <p className="text-[11px] text-gray-500">Today's Revenue</p>
                 <h1 className="text-neutral-950  font-bold text-2xl">
-                  $111.00
+                  {state.revenue}
                 </h1>
               </article>
 
@@ -55,7 +57,9 @@ export default function SalesList() {
 
               <article className=" bg-gray-50 border border-gray-300 p-4 rounded-[10px]">
                 <p className="text-[11px] text-gray-500">NO. product sold</p>
-                <h1 className="text-neutral-950  font-bold text-2xl">20</h1>
+                <h1 className="text-neutral-950  font-bold text-2xl">
+                  {state.noItemSold}
+                </h1>
               </article>
             </section>
 

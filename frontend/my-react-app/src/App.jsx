@@ -22,8 +22,9 @@ export let ReducerContext = createContext();
 
 // initial state for reducer
 let initialState = {
-  revenue: "",
+  revenue: 0,
   noItemSold: 0,
+  noOfOrdersMade: 0,
   products: [],
   orders: [],
   sales: [],
@@ -55,64 +56,116 @@ function reducer(state, action) {
     }
 
     case "add_orders": {
+      let orderArr = [...state.orders, action.orders].filter(
+        (order, index, self) => {
+          return index === self.findIndex((e) => e.name === order.name);
+        },
+      );
+
+      let total_number_of_item = orderArr.reduce(
+        (acc, product) => acc + product.itemQuantity,
+        0,
+      );
+
       return {
         ...state,
-        orders: [...state.orders, action.orders],
+        orders: orderArr,
+        noItemSold: total_number_of_item,
+        revenue: orderArr.reduce(
+          (acc, product) => acc + product.price * product.itemQuantity,
+          0,
+        ),
       };
     }
 
     case "delete_item":
+      let changeOrders = state.orders.filter((a) => a.id !== action.id);
       return {
         ...state,
-        orders: state.orders.filter((a) => a.id !== action.id),
-        noItemSold: state.noItemSold > 0 && state.noItemSold - 1,
+        orders: changeOrders,
+        noItemSold:
+          state.noItemSold > 0 &&
+          state.noItemSold -
+            state.orders
+              .filter((a) => a.id === action.id)
+              .reduce((acc, item) => acc + item.itemQuantity, 0),
+        revenue: changeOrders.reduce(
+          (acc, product) => acc + product.price * product.itemQuantity,
+          0,
+        ),
       };
 
-    case "increase_noItemSold": {
+    // INCREASET ITEM QUANTITY (CART)
+    case "increase_item_QUANTITY":
+      let newOrders = state.orders.map((item) => {
+        if (item.id === action.id) {
+          return {
+            ...item,
+            itemQuantity: item.itemQuantity + 1,
+            totalCost: item.price * (item.itemQuantity + 1),
+          };
+        }
+
+        return { ...item };
+      });
       return {
         ...state,
+        orders: newOrders,
         noItemSold: state.noItemSold + 1,
+        revenue: newOrders.reduce(
+          (acc, product) => acc + product.price * product.itemQuantity,
+          0,
+        ),
+      };
+
+    // DECREASE ITEM QUANTITY (CART)
+    case "decrease_item_QUANTITY":
+      let Quantity = state.orders
+        .filter((a) => a.id === action.id)
+        .reduce((acc, item) => acc + item.itemQuantity, 0);
+
+      // NEW ORDERS
+      let changedOrders = state.orders.map((item) => {
+        if (item.id === action.id) {
+          let newQuantity = item.itemQuantity > 1 ? item.itemQuantity - 1 : 1;
+          let newPrice = item.price * newQuantity - 1;
+          return {
+            ...item,
+            itemQuantity: newQuantity,
+            totalCost: newPrice,
+          };
+        }
+
+        return { ...item };
+      });
+      return {
+        ...state,
+        orders: changedOrders,
+        noItemSold: Quantity > 1 ? state.noItemSold - 1 : state.noItemSold,
+
+        revenue: changedOrders.reduce(
+          (acc, product) => acc + product.price * product.itemQuantity,
+          0,
+        ),
+      };
+
+    /*/ GET TOTAL SUM OF COST (CART)
+    case "getTotalCost":
+      return {
+        ...state,
+        revenue: state.orders.reduce(
+          (acc, product) => acc + product.price * product.itemQuantity,
+          0,
+        ),
+      };
+*/
+    // GET TOTAL ORDERS MADE (CART)
+    case "increase_noOfOrders": {
+      return {
+        ...state,
+        noOfOrdersMade: state.noOfOrdersMade + 1,
       };
     }
-
-    // INCREASET ITEM QUANTITY
-    case "increase_item_QUANTITY":
-      return {
-        ...state,
-        orders: state.orders.map((item) => {
-          if (item.id === action.id) {
-            return {
-              ...item,
-              itemQuantity: item.itemQuantity + 1,
-              totalCost: item.price * (item.itemQuantity + 1),
-            };
-          }
-
-          return { ...item };
-        }),
-
-        noItemSold: state.noItemSold + 1,
-      };
-
-    // DECREASE ITEM QUANTITY
-    case "decrease_item_QUANTITY":
-      return {
-        ...state,
-        orders: state.orders.map((item) => {
-          if (item.id === action.id) {
-            return {
-              ...item,
-              itemQuantity: item.itemQuantity > 1 ? item.itemQuantity - 1 : 1,
-            };
-          }
-
-          return { ...item };
-        }),
-      };
-
-    // GET TOTAL SUM OF COST
-    case "total_cost":
-      return state.orders.reduce();
 
     default:
       return state;

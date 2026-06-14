@@ -127,7 +127,6 @@ function ProductList({ onChangeOrder }) {
             <li
               key={product._id}
               onClick={() => {
-                dispatch({ type: "increase_noItemSold" });
                 dispatch({
                   type: "add_orders",
                   orders: {

@@ -15,10 +15,10 @@ function Cart({ onShowCart }) {
   let { orders, onChangeOrders } = useContext(OrderContext);
   let [state, dispatch] = useContext(ReducerContext);
 
-  // CREATING ORDER ARRAY WITH UNIQUE OBJECT(WITHOUT DUPLICATE)
+  /*/ CREATING ORDER ARRAY WITH UNIQUE OBJECT(WITHOUT DUPLICATE)
   let itemsArray = state.orders.filter((order,index,self) => {
     return index === self.findIndex((e) => e.name === order.name)
-  });
+  })*/
   return (
     <section className=" z-10 absolute md:static top-0 right-0 h-screen md:h-[90%]  lg:h-[90vh] w-full flex flex-col items-start bg-white">
       <header className="w-full flex flex-row justify-between p-4 h-[10%]">
@@ -35,7 +35,7 @@ function Cart({ onShowCart }) {
       {isAdd ? (
         <section className="flex-1  w-full h-[90%] ">
           <ul className="h-[60%] px-3 overflow-auto border-y border-gray-200">
-            {itemsArray.map((item, index) => {
+            {state.orders.map((item, index) => {
               return (
                 <li
                   key={index}
@@ -101,8 +101,11 @@ function Cart({ onShowCart }) {
               <p className="text-blue-800 font-extrabold ">$13.5%</p>
             </section>
 
-            <button className="bg-blue-800 hover:bg-blue-500 text-white w-full  p-3  my-1.5 rounded-[10px]">
-              charge %500
+            <button
+              onClick={() => dispatch({ type: "increase_noOfOrders" })}
+              className="bg-blue-800 hover:bg-blue-500 text-white w-full  p-3  my-1.5 rounded-[10px]"
+            >
+              {state.revenue}
             </button>
 
             {/*payment method */}
