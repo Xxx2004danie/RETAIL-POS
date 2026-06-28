@@ -5,12 +5,6 @@ let userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  password: {
-    type: String,
-    require: true,
-    minlengt: 8,
-    trim: true,
-  },
 
   email: {
     type: String,
@@ -21,7 +15,7 @@ let userSchema = new mongoose.Schema({
   },
 
   phoneNumber: {
-    type: Number,
+    type: String,
     require: true,
     trim: true,
   },

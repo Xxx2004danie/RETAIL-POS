@@ -77,7 +77,7 @@ function ProductList({ onChangeOrder }) {
   //CART
   let itemId = 0;
   return (
-    <section className="flex flex-col   bg-gray-300 w-full  h-[90vh] p-3 ">
+    <section className="flex flex-col   bg-gray-300 w-full  h-[90vh] py-3 px-5 ">
       {/* product analysis */}
       <nav className=" flex flex-row  gap-3    overflow-x-auto  p-2 shrink-0">
         <Button className={navBtnStyle}>Receipt</Button>
@@ -94,7 +94,7 @@ function ProductList({ onChangeOrder }) {
       />
 
       {/* porduct categories */}
-      <article className="flex flex-row  gap-x-1 p-3  shrink-0 md: w-full overflow-x-auto">
+      <article className="flex flex-row  gap-x-1 p-3  shrink-0 md:w-full overflow-x-auto">
         <Button
           className={btnSyles}
           onGet={() => getProducts(`${globalUrl}/products`)}
@@ -121,7 +121,7 @@ function ProductList({ onChangeOrder }) {
 
       {/* Box 3 - Product Buttons Grid */}
 
-      <ul className="  w-full flex-1  items-start  justify-center overflow-y-auto grid grid-cols-2 md:grid-cols-3 p-6 gap-1  ">
+      <ul className="  w-full flex-1  items-start  justify-center overflow-y-auto grid grid-cols-2 md:grid-cols-3 gap-1  ">
         {state.products.map((product) => {
           return (
             <li
@@ -138,10 +138,10 @@ function ProductList({ onChangeOrder }) {
                   },
                 });
               }}
-              className=" flex flex-col  items-center justify-center  bg-gray-50 h-25 md:h-auto  text-neutral-900  border-2 border-white hover:border-blue-200 rounded-lg p-2 text-left hover:shadow transition"
+              className=" flex flex-col  items-center justify-center  bg-gray-50 h-25 md:h-auto  text-neutral-900  border-2 border-white hover:border-blue-200 rounded-lg text-left hover:shadow transition"
             >
               <p className="text-sm text-blue-400 ">{product.name}</p>
-              <h1 className="text-lg font-bold ">{product.price}</h1>
+              <h1 className="text-sm md:text-lg font-bold ">{product.price}</h1>
             </li>
           );
         })}

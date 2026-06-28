@@ -20,7 +20,7 @@ export let createUser = async (url, data) => {
     let response = await fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "appication/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
@@ -29,8 +29,8 @@ export let createUser = async (url, data) => {
       throw new Error(`server response status ${response.status}`);
     }
 
-    let data = response.json();
-    return data;
+    let resposne = await response.json();
+    return response;
   } catch (error) {
     console.error("could not create user", error);
   }
